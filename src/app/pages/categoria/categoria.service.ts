@@ -14,6 +14,10 @@ export class CategoriaService extends CrudService<Categoria> {
     constructor(public http: HttpClient) {
         super('categoria', http);
     }
+    
+    public get novoRegistro(): Observable<Categoria> {
+        return of({ descricao: '' });
+    }
 
     /**
      * @description MOCK FAVOR REMOVER

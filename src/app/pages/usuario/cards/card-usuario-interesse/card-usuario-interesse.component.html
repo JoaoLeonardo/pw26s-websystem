@@ -3,11 +3,41 @@
     <!-- Título -->
     <mat-card-title>Interesses</mat-card-title>
 
-    <!-- Form -->
-    <mat-card-subtitle>
-        <form [formGroup]="form">
+    <!-- Interesses -->
+    <mat-card-subtitle class="d-pad-top">
 
-        </form>
+        <!-- Loading -->
+        <div *ngIf="loading; else chips" class="d-flex justify-center">
+            <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+        </div>
+
+        <!-- Chips -->
+        <ng-template #chips>
+            <mat-form-field class="full-width" appearance="fill">
+
+                <!-- Chip list -->
+                <mat-chip-list #chipList aria-label="Seleção de interesses">
+                    <mat-chip *ngFor="let interesse of listaInteresses" [selectable]="false" [removable]="true"
+                        (removed)="removerInteresse(interesse)">
+                        {{interesse.descricao}}
+                        <button matChipRemove>
+                            <mat-icon>cancel</mat-icon>
+                        </button>
+                    </mat-chip>
+                    <input placeholder="Novo interesse..." #interessesInput [matAutocomplete]="auto"
+                        [matChipInputFor]="chipList">
+                </mat-chip-list>
+
+                <!-- Autocomplete -->
+                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="adicionarInteresse($event)">
+                    <mat-option *ngFor="let interesse of listaInteressesFiltrados" [value]="interesse">
+                        {{interesse.descricao}}
+                    </mat-option>
+                </mat-autocomplete>
+
+            </mat-form-field>
+        </ng-template>
+
     </mat-card-subtitle>
 
 </mat-card>

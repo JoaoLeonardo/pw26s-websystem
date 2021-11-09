@@ -7,7 +7,7 @@ import { Subscription } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 // shared
-import { CrudComponent } from 'src/app/shared/components/crud/crud-component';;
+import { BasicCrudComponent } from 'src/app/shared/components/crud/basic-crud-component';
 
 // aplicação
 import { Categoria } from './models/categoria';
@@ -22,7 +22,7 @@ import { CardCategoriaPesquisaComponent } from './cards/card-categoria-pesquisa/
         CategoriaService,
     ]
 })
-export class CategoriaComponent extends CrudComponent<Categoria> implements AfterViewInit {
+export class CategoriaComponent extends BasicCrudComponent<Categoria> implements AfterViewInit {
 
     @ViewChild(CardCategoriaEdicaoComponent)
     private cardEdicao!: CardCategoriaEdicaoComponent;
@@ -65,10 +65,6 @@ export class CategoriaComponent extends CrudComponent<Categoria> implements Afte
         })
     }
 
-    public get novoRegistro(): Categoria {
-        return { descricao: '' };
-    }
-
     /**
      * @description Remove o registro e configura o card de edição (se necessário)
      * @param id Id do registro
@@ -77,7 +73,7 @@ export class CategoriaComponent extends CrudComponent<Categoria> implements Afte
         super.remover(id);
 
         if (this.form.get('id')?.value === id) {
-            this.form.reset(this.novoRegistro);
+            this.form.reset();
         }
     }
 

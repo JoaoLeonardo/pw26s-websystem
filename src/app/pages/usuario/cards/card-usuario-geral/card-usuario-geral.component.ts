@@ -1,9 +1,9 @@
 
-import { Component, Input } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 // shared
-import { CrudCard } from 'src/app/shared/components/crud/crud-card';
+import { AdvancedCrudCard } from 'src/app/shared/components/crud/advanced-crud-card';
 
 // aplicação
 import { Usuario } from '../../models/usuario';
@@ -12,22 +12,22 @@ import { Usuario } from '../../models/usuario';
     selector: 'app-card-usuario-geral',
     templateUrl: 'card-usuario-geral.component.html'
 })
-export class CardUsuarioGeralComponent implements CrudCard<Usuario> {
+export class CardUsuarioGeralComponent extends AdvancedCrudCard<Usuario> {
 
-    /**
-     * @description FormGroup do card
-     */
-    public form: FormGroup;
-
-    constructor() { 
-        this.form = this.criarForm();
+    constructor(public formBuilder: FormBuilder) {
+        super(formBuilder);
     }
 
     /**
      * @description Retorna um novo form
      */
     criarForm(): FormGroup {
-        throw new Error('Method not implemented.');
+        return this.formBuilder.group({
+            nome: [null, Validators.required],
+            sobrenome: [null, Validators.required],
+            email: [null, Validators.required],
+            username: [null, Validators.required],
+        })
     }
 
     /**

@@ -6,9 +6,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // material
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
+import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 
@@ -28,12 +30,14 @@ const routes: Routes = [
         FormsModule,
         HttpClientModule,
         ReactiveFormsModule,
-        
+
         // material
         MatProgressSpinnerModule,
+        MatAutocompleteModule,
         MatSnackBarModule,
         MatButtonModule,
         MatInputModule,
+        MatChipsModule,
         MatIconModule,
         MatCardModule,
     ],

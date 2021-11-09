@@ -6,6 +6,17 @@ $warn: map-get($theme, warn);
 $sucess: map-get($sucess-theme, primary);
 $soft-primary: map-get($soft-theme, primary);
 
+h2 {
+    color: white;
+    font-size: 2em !important; 
+    background-color: mat-color($accent);
+    border: 3px solid mat-color($primary);
+    border-radius: 50px;
+    padding: 8px 16px 8px 50px;
+    left: -50px;
+    position: relative;
+}
+
 .mat-button {
     color: #fff !important;
     background-color: mat-color($primary) !important;
@@ -25,3 +36,8 @@ $soft-primary: map-get($soft-theme, primary);
 }
 
 .mat-button-hover-actions { display: none !important; }
+
+.accent-hover:hover { 
+    background-color: mat-color($primary); 
+    transition: 200ms;
+}

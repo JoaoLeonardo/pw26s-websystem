@@ -22,6 +22,8 @@ body {
 .justify-center { justify-content: center; }
 
 .align-center { align-items: center; }
+.align-self-start { align-self: start; }
+.align-self-end { align-self: end; }
 
 .column { flex-direction: column; }
 
@@ -54,3 +56,5 @@ body {
 
 .text-center { text-align: center; }
 .text-end { text-align: end; }
+
+.icon-offset-top { padding-top: 2px; }

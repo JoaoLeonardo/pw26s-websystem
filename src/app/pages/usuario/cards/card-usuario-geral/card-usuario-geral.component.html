@@ -1,11 +1,35 @@
 <mat-card class="d-m">
 
     <!-- Título -->
-    <mat-card-title>Geral</mat-card-title>
+    <mat-card-title>Dados gerais</mat-card-title>
 
     <!-- Form -->
-    <mat-card-subtitle>
+    <mat-card-subtitle class="d-pad-top">
         <form [formGroup]="form">
+
+            <!-- Nome -->
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Nome</mat-label>
+                <input matInput formControlName="nome" placeholder="Nos conte seu nome..." cdkFocusInitial>
+            </mat-form-field>
+
+            <!-- Sobrenome -->
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Sobrenome</mat-label>
+                <input matInput formControlName="sobrenome" placeholder="Nos conte seu sobrenome...">
+            </mat-form-field>
+
+            <!-- Email -->
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Email</mat-label>
+                <input matInput formControlName="email" placeholder="Digite seu email..." type="email">
+            </mat-form-field>
+
+            <!-- Nome de usuário -->
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Nome de usuário</mat-label>
+                <input matInput formControlName="username" placeholder="Digite aqui como devemos chamá-lo...">
+            </mat-form-field>
 
         </form>
     </mat-card-subtitle>

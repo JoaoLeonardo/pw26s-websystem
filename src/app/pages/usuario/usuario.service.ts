@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 // shared
 import { CrudService } from 'src/app/shared/components/crud/crud.service';
@@ -13,6 +13,16 @@ export class UsuarioService extends CrudService<Usuario> {
 
     constructor(public http: HttpClient) {
         super('usuario', http);
+    }
+
+    public get novoRegistro(): Observable<Usuario> {
+        return of({
+            nome: '',
+            sobrenome: '',
+            email: '',
+            username: '',
+            password: '',
+        });
     }
 
     /**
