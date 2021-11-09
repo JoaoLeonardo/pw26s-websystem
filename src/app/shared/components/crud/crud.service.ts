@@ -11,6 +11,11 @@ export abstract class CrudService<T> {
     ) { }
 
     /**
+     * @description Retorna um novo registro (T)
+     */
+    public abstract get novoRegistro(): Observable<T>;
+
+    /**
      * @description Inclui o novo registro
      * @returns Void
      * @param novo Registro da inclusão
