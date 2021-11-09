@@ -57,7 +57,7 @@ export abstract class BasicCrudComponent<T> implements CrudComponent<T>, OnInit 
                     this.form.reset(res);
                 }, error => {
                     this.loading = false;
-                    this.snackBar.open(error);
+                    this.snackBar.open(error.message, 'Ok');
                 });
             }
         });
@@ -142,8 +142,10 @@ export abstract class BasicCrudComponent<T> implements CrudComponent<T>, OnInit 
     /**
      * @description Valida o preenchimento do form
      * @returns True se o form for válido
+     * @param markAsDirty Marca o form como dirty antes de validar 
      */
     public validarForm(): boolean {
+        this.form.markAllAsTouched();
         this.form.updateValueAndValidity();
         return this.form.valid;
     }

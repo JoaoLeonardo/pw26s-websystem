@@ -1,4 +1,4 @@
-import { Injectable, OnInit, QueryList, ViewChildren } from "@angular/core";
+import { Injectable, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 
 // material
@@ -7,13 +7,10 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 // aplicação
 import { CrudService } from "./crud.service";
 import { CrudComponent } from "./crud-component";
-import { AdvancedCrudCard } from "./advanced-crud-card";
+import { AdvancedCrudController } from "./advanced-crud.controller";
 
 @Injectable()
 export abstract class AdvancedCrudComponent<T> implements CrudComponent<T>, OnInit {
-
-    @ViewChildren(AdvancedCrudCard)
-    public cards?: QueryList<AdvancedCrudCard<T>>;
 
     /**
      * @description Registro do formulário
@@ -26,6 +23,7 @@ export abstract class AdvancedCrudComponent<T> implements CrudComponent<T>, OnIn
     public loading: boolean;
 
     constructor(
+        public crudController: AdvancedCrudController<T>,
         public service: CrudService<T>,
         public snackBar: MatSnackBar,
         public route: ActivatedRoute,
@@ -53,7 +51,7 @@ export abstract class AdvancedCrudComponent<T> implements CrudComponent<T>, OnIn
                     this.registro = res;
                 }, error => {
                     this.loading = false;
-                    this.snackBar.open(error);
+                    this.snackBar.open(error.message, 'Ok');
                 });
             }
         });
@@ -143,8 +141,8 @@ export abstract class AdvancedCrudComponent<T> implements CrudComponent<T>, OnIn
      * @description Atualiza os cards com o novo registro buscado
      */
     public atualizarCards() {
-        if (this.cards) {
-            this.cards.forEach(card => card.setForm(this.registro));
+        if (this.crudController.cardList) {
+            this.crudController.cardList.forEach(card => card.setForm(this.registro));
         }
     }
 
@@ -152,8 +150,8 @@ export abstract class AdvancedCrudComponent<T> implements CrudComponent<T>, OnIn
      * @description Atualiza o registro com os valores dos cards
      */
     public atualizarRegistro() {
-        if (this.cards) {
-            this.cards.forEach(card => card.setRegistro(this.registro));
+        if (this.crudController.cardList) {
+            this.crudController.cardList.forEach(card => card.setRegistro(this.registro));
         }
     }
 
@@ -162,11 +160,7 @@ export abstract class AdvancedCrudComponent<T> implements CrudComponent<T>, OnIn
      * @returns True se todos os forms forem válidos
      */
     public validarForm(): boolean {
-        if (!this.cards) {
-            return false;
-        }
-
-        for (let card of this.cards) {
+        for (let card of this.crudController.cardList) {
             if (!card.validarForm()) {
                 return false;
             }
