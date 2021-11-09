@@ -46,6 +46,7 @@ export class CategoriaComponent extends BasicCrudComponent<Categoria> implements
     }
 
     ngAfterViewInit(): void {
+        super.ngOnInit();
         this.implementEvents();
     }
 
