@@ -25,17 +25,4 @@ export class UsuarioService extends CrudService<Usuario> {
         });
     }
 
-    /**
-     * @description MOCK FAVOR REMOVER
-     */
-    public incluir(novo: Usuario): Observable<void> {
-        return new Observable(observer => {
-            setTimeout(() => {
-                // observer.next();
-                observer.error("Oops! Não foi possível salvar o registro... :(");
-                observer.complete();
-            }, 600);
-        })
-    }
-
 }

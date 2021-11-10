@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 // shared
 import { AdvancedCrudCard } from 'src/app/shared/components/crud/advanced-crud-card';
+import { AdvancedCrudController } from 'src/app/shared/components/crud/advanced-crud.controller';
 
 // aplicação
 import { Usuario } from '../../models/usuario';
@@ -14,8 +15,11 @@ import { Usuario } from '../../models/usuario';
 })
 export class CardUsuarioGeralComponent extends AdvancedCrudCard<Usuario> {
 
-    constructor(public formBuilder: FormBuilder) {
-        super(formBuilder);
+    constructor(
+        public crudController: AdvancedCrudController<Usuario>,
+        public formBuilder: FormBuilder,
+    ) {
+        super(crudController, formBuilder);
     }
 
     /**

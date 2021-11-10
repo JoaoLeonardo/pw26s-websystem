@@ -12,4 +12,18 @@
     <!-- Card interesses -->
     <app-card-usuario-interesse class="full-width"></app-card-usuario-interesse>
 
+    <!-- Ações -->
+    <div class="d-flex justify-end d-m">
+
+        <!-- Loading -->
+        <mat-progress-spinner *ngIf="loading" class="d-m-right" mode="indeterminate"></mat-progress-spinner>
+
+        <!-- Button -->
+        <button mat-fab color="primary" aria-label="Gravar registro" (click)="persistirAlteracoes(true)">
+            <mat-icon>check</mat-icon>
+        </button>
+
+    </div>
+
+
 </div>

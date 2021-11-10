@@ -3,16 +3,17 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
 // material
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 
 // shared
 import { AdvancedCrudCard } from 'src/app/shared/components/crud/advanced-crud-card';
+import { AdvancedCrudController } from 'src/app/shared/components/crud/advanced-crud.controller';
 
 // aplicação
 import { Usuario } from '../../models/usuario';
 import { Categoria } from 'src/app/pages/categoria/models/categoria';
 import { CategoriaService } from 'src/app/pages/categoria/categoria.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
     selector: 'app-card-usuario-interesse',
@@ -41,9 +42,10 @@ export class CardUsuarioIntesseComponent extends AdvancedCrudCard<Usuario> {
     constructor(
         private categoriaService: CategoriaService,
         private snackBar: MatSnackBar,
+        public crudController: AdvancedCrudController<Usuario>,
         public formBuilder: FormBuilder,
     ) {
-        super(formBuilder);
+        super(crudController, formBuilder);
 
         // inicia as variáveis usadas no template
         this.listaTodosInteresses = [];
@@ -78,7 +80,7 @@ export class CardUsuarioIntesseComponent extends AdvancedCrudCard<Usuario> {
             this.listaInteressesFiltrados = this.listaTodosInteresses;
         }, error => {
             this.loading = false;
-            this.snackBar.open(error)
+            this.snackBar.open(error.message, 'Ok');
         });
     }
 
@@ -111,4 +113,5 @@ export class CardUsuarioIntesseComponent extends AdvancedCrudCard<Usuario> {
         }
 
     }
+    
 }
