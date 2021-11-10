@@ -31,6 +31,7 @@ body {
 .d-m { margin: 8px !important; }
 .d-m-right { margin-right: 8px !important; }
 .d-m-left { margin-left: 8px !important; }
+.d-m-bottom { margin-bottom: 8px !important; }
 .d-pad { padding: 8px !important; }
 .d-pad-right { padding-right: 8px !important; }
 .d-pad-top { padding-top: 8px !important; }

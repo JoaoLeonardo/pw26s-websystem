@@ -57,7 +57,7 @@ export class CardUsuarioIntesseComponent extends AdvancedCrudCard<Usuario> {
     }
 
     public get listaInteresses(): Categoria[] {
-        return this.form.get('interesses')?.value || [];
+        return this.form.get('interesses')!.value;
     }
 
     /**
@@ -89,11 +89,12 @@ export class CardUsuarioIntesseComponent extends AdvancedCrudCard<Usuario> {
      */
     public adicionarInteresse(event: MatAutocompleteSelectedEvent) {
         const novoInteresse: Categoria = event.option.value;
+        const listaInteresses = this.listaInteresses || [];
 
         if (novoInteresse) {
+            listaInteresses.push(novoInteresse);
             // adiciona o novo interesse na lista e atualiza o FormControl
-            this.listaInteresses.push(novoInteresse);
-            this.form.get('interesses')!.setValue(this.listaInteresses);
+            this.form.get('interesses')!.setValue(listaInteresses);
         }
 
         // limpa o input
@@ -105,13 +106,14 @@ export class CardUsuarioIntesseComponent extends AdvancedCrudCard<Usuario> {
      */
     public removerInteresse(interesse: Categoria) {
         const index = this.listaInteresses.indexOf(interesse);
+        const listaInteresses = this.listaInteresses || [];
 
         if (index >= 0) {
             // remove o interesse da lista e atualiza o FormControl
-            this.listaInteresses.splice(index, 1);
-            this.form.get('interesses')!.setValue(this.listaInteresses);
+            listaInteresses.splice(index, 1);
+            this.form.get('interesses')!.setValue(listaInteresses);
         }
 
     }
-    
+
 }
