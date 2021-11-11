@@ -60,6 +60,7 @@
                         type="password" required>
                 </mat-form-field>
 
+                <!-- Erros -->
                 <mat-error *ngIf="dadosUsuarioForm.errors?.['confirmacaoIsDiferente']">
                     A <b>senha</b> e a <b>confirmação da senha</b> estão diferentes
                 </mat-error>

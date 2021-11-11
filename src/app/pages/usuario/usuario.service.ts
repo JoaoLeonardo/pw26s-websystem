@@ -11,6 +11,7 @@ import { Usuario } from './models/usuario';
 @Injectable()
 export class UsuarioService extends CrudService<Usuario> {
 
+    // TODO: Validar na carga se o usuário sendo carregado é o mesmo que está logado!!!!
     constructor(public http: HttpClient) {
         super('usuario', http);
     }
