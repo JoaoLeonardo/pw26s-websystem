@@ -36,4 +36,20 @@ export class ArtigoComponent extends AdvancedCrudComponent<Artigo> implements On
         super.ngOnInit();
     }
 
+    /**
+     * @description Executa no click do botão publicar
+     */
+    public onClickPublicar() {
+        super.persistirAlteracoes(this.registro.id != null);
+    }
+
+    /**
+     * @description Executa no click do botão excluir
+     */
+    public onClickRemover() {
+        if (this.registro.id && confirm('Você tem certeza que deseja remover o artigo? Essa ação não poderá ser desfeita.')) {
+            super.remover(this.registro.id);
+        }
+    }
+
 }

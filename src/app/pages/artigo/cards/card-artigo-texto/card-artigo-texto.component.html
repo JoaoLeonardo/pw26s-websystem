@@ -7,6 +7,23 @@
     <mat-card-subtitle class="d-pad-top">
         <form [formGroup]="form">
 
+            <!-- Slide toggle -->
+            <div class="full-width d-m row justify-end">
+                <mat-slide-toggle [checked]="slideChecked" (toggleChange)="onSlideChange()">
+                    Visualizar HTML gerado
+                </mat-slide-toggle>
+            </div>
+
+            <!-- Campo (texto) -->
+            <mat-form-field *ngIf="!slideChecked; else visualizacaoTexto" class="full-width" appearance="fill">
+                <textarea matInput formControlName="texto" placeholder="Digite seu texto como HTML..." [rows]="15" required></textarea>
+            </mat-form-field>
+
+            <!-- Texto como HTML -->
+            <ng-template #visualizacaoTexto>
+                <div class="full-width" [innerHtml]="texto"></div>
+            </ng-template>
+
         </form>
     </mat-card-subtitle>
 

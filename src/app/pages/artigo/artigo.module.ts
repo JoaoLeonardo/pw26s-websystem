@@ -7,6 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // material
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
@@ -34,6 +35,7 @@ const routes: Routes = [
         // material
         MatProgressSpinnerModule,
         MatAutocompleteModule,
+        MatSlideToggleModule,
         MatSnackBarModule,
         MatButtonModule,
         MatInputModule,
