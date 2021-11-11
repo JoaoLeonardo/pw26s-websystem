@@ -22,9 +22,6 @@ export class CardArtigoTextoComponent extends AdvancedCrudCard<Artigo> {
         super(crudController, formBuilder);
     }
 
-    /**
-     * @description Retorna um novo form
-     */
     criarForm(): FormGroup {
         return this.formBuilder.group({
             texto: [null, Validators.required],

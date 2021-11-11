@@ -14,6 +14,19 @@
                     required>
             </mat-form-field>
 
+            <!-- Categoria -->
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Categoria</mat-label>
+                <input #categoriaInput type="text" placeholder="Selecione..." aria-label="Categoria" matInput
+                    [matAutocomplete]="auto" formControlName="categoria" (input)="filtrarCategoria()"
+                    (focus)="categoriaAutocomplete.onFocusAutocomplete()" required>
+                <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                    <mat-option *ngFor="let option of categoriaAutocomplete.optionsFiltradas | async" [value]="option">
+                        {{option.descricao}}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+
             <!-- Descrição -->
             <mat-form-field class="full-width" appearance="fill">
                 <mat-label>Descrição</mat-label>
@@ -41,7 +54,6 @@
                         (matChipInputTokenEnd)="adicionarPalavraChave($event)">
                 </mat-chip-list>
             </mat-form-field>
-
 
         </form>
     </mat-card-subtitle>

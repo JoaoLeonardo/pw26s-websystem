@@ -5,39 +5,29 @@
 
     <!-- Interesses -->
     <mat-card-subtitle class="d-pad-top">
+        <mat-form-field class="full-width" appearance="fill">
 
-        <!-- Loading -->
-        <div *ngIf="loading; else chips" class="d-flex justify-center">
-            <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
-        </div>
+            <!-- Chip list -->
+            <mat-chip-list #chipList aria-label="Seleção de interesses">
+                <mat-chip *ngFor="let interesse of listaInteresses" [selectable]="false" [removable]="true"
+                    (removed)="removerInteresse(interesse)">
+                    {{interesse.descricao}}
+                    <button matChipRemove>
+                        <mat-icon>cancel</mat-icon>
+                    </button>
+                </mat-chip>
+                <input placeholder="Novo interesse..." #interessesInput [matAutocomplete]="auto"
+                    [matChipInputFor]="chipList" (focus)="interesseAutocomplete.onFocusAutocomplete()" (input)="filtrarInteresse()">
+            </mat-chip-list>
 
-        <!-- Chips -->
-        <ng-template #chips>
-            <mat-form-field class="full-width" appearance="fill">
+            <!-- Autocomplete -->
+            <mat-autocomplete #auto="matAutocomplete" (optionSelected)="adicionarInteresse($event)">
+                <mat-option *ngFor="let interesse of interesseAutocomplete.optionsFiltradas | async" [value]="interesse">
+                    {{interesse.descricao}}
+                </mat-option>
+            </mat-autocomplete>
 
-                <!-- Chip list -->
-                <mat-chip-list #chipList aria-label="Seleção de interesses">
-                    <mat-chip *ngFor="let interesse of listaInteresses" [selectable]="false" [removable]="true"
-                        (removed)="removerInteresse(interesse)">
-                        {{interesse.descricao}}
-                        <button matChipRemove>
-                            <mat-icon>cancel</mat-icon>
-                        </button>
-                    </mat-chip>
-                    <input placeholder="Novo interesse..." #interessesInput [matAutocomplete]="auto"
-                        [matChipInputFor]="chipList">
-                </mat-chip-list>
-
-                <!-- Autocomplete -->
-                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="adicionarInteresse($event)">
-                    <mat-option *ngFor="let interesse of listaInteressesFiltrados" [value]="interesse">
-                        {{interesse.descricao}}
-                    </mat-option>
-                </mat-autocomplete>
-
-            </mat-form-field>
-        </ng-template>
-
+        </mat-form-field>
     </mat-card-subtitle>
 
 </mat-card>
