@@ -1,0 +1,30 @@
+<div class="d-flex column d-pad">
+
+    <!-- Título -->
+    <h2 class="d-flex align-center d-m mat-elevation-z2 accent-hover align-self-start">
+        <b class="d-m-right">Artigo</b>
+        <mat-icon class="icon-offset-top">account_circle</mat-icon>
+    </h2>
+
+    <!-- Card cabeçalho -->
+    <app-card-artigo-cabecalho class="full-width"></app-card-artigo-cabecalho>
+
+    <!-- Ações -->
+    <div class="d-flex justify-end d-m">
+
+        <!-- Loading -->
+        <mat-progress-spinner *ngIf="loading" class="d-m-right" mode="indeterminate"></mat-progress-spinner>
+
+        <!-- Btn Publicar -->
+        <button mat-button class="mat-button-sucess d-m-left">Publicar</button>
+
+        <!-- Btn Excluir -->
+        <button *ngIf="registro.id" mat-button class="mat-button-warn">Excluir</button>
+
+    </div>
+
+    <!-- Card texto -->
+    <app-card-artigo-texto class="full-width"></app-card-artigo-texto>
+
+
+</div>

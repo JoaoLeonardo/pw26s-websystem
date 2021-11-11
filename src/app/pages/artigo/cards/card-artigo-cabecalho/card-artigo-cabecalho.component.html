@@ -1,0 +1,49 @@
+<mat-card class="d-m">
+
+    <!-- Título -->
+    <mat-card-title>Cabeçalho</mat-card-title>
+
+    <!-- Form -->
+    <mat-card-subtitle class="d-pad-top">
+        <form [formGroup]="form">
+
+            <!-- Nome -->
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Título</mat-label>
+                <input matInput formControlName="titulo" placeholder="Digite o título do seu artigo..." cdkFocusInitial
+                    required>
+            </mat-form-field>
+
+            <!-- Descrição -->
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Descrição</mat-label>
+                <input matInput formControlName="descricao" placeholder="Descreva seu artigo brevemente..." required>
+            </mat-form-field>
+
+            <!-- Erros da descrição -->
+            <mat-error class="d-m-bottom" *ngIf="descricaoControl!.errors?.['descricaoMaiorQueMax']">
+                A <b>descrição</b> não pode possuir mais do que 140 caracteres!
+            </mat-error>
+
+            <!-- Palavras-chave -->
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Palavras-chave</mat-label>
+                <mat-chip-list #chipList aria-label="Palavras-chave do artigo" multiple formControlName="palavrasChave"
+                    required>
+                    <mat-chip *ngFor="let palavra of palavrasChave" [value]="palavra"
+                        (removed)="removerPalavraChave(palavra)">
+                        {{palavra}}
+                        <button matChipRemove>
+                            <mat-icon>cancel</mat-icon>
+                        </button>
+                    </mat-chip>
+                    <input #chipInput placeholder="Nova palavra-chave..." [matChipInputFor]="chipList"
+                        (matChipInputTokenEnd)="adicionarPalavraChave($event)">
+                </mat-chip-list>
+            </mat-form-field>
+
+
+        </form>
+    </mat-card-subtitle>
+
+</mat-card>

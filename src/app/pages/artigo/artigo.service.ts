@@ -6,23 +6,21 @@ import { Observable, of } from 'rxjs';
 import { CrudService } from 'src/app/shared/components/crud/crud.service';
 
 // aplicação
-import { Usuario } from './models/usuario';
+import { Artigo } from './models/artigo';
 
 @Injectable()
-export class UsuarioService extends CrudService<Usuario> {
+export class ArtigoService extends CrudService<Artigo> {
 
-    // TODO: Validar na carga se o usuário sendo carregado é o mesmo que está logado!!!!
     constructor(public http: HttpClient) {
         super('usuario', http);
     }
 
-    public get novoRegistro(): Observable<Usuario> {
+    public get novoRegistro(): Observable<Artigo> {
         return of({
-            nome: '',
-            sobrenome: '',
-            email: '',
-            username: '',
-            password: '',
+            titulo: '',
+            descricao: '',
+            palavrasChave: [],
+            texto: '',
         });
     }
 
