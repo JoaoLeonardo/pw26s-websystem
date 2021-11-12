@@ -160,7 +160,7 @@ export abstract class AdvancedCrudComponent<T> implements CrudComponent<T>, OnIn
      * @returns True se todos os forms forem válidos
      */
     public validarForm(): boolean {
-        for (let card of this.crudController.cardList) {
+        for (const card of this.crudController.cardList) {
             if (!card.validarForm()) {
                 return false;
             }

@@ -49,7 +49,7 @@ body {
 
 .border-r-hard { border-radius: 16px !important;}
 
-.full-width { width: 100%; }
+.full-width { width: 100%; } /* TODO: Criar versão para cards que não ocupe 100%!!!!!! */
 
 .overflow-x {
     overflow-x: scroll;

@@ -2,8 +2,16 @@ import { Inject, Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http"
 import { Observable } from "rxjs";
 
+// environment
+import { environment } from "src/environments/environment";
+
 @Injectable()
 export abstract class CrudService<T> {
+
+    /**
+     * @description Armazena a url base do sistema
+     */
+    private baseUrl = environment.api;
 
     constructor(
         @Inject('url') public url: string,
@@ -21,7 +29,7 @@ export abstract class CrudService<T> {
      * @param novo Registro da inclusão
      */
     public incluir(novo: T): Observable<void> {
-        return this.http.post<void>(this.url + '/incluir', novo);
+        return this.http.post<void>(this.baseUrl + this.url + '/incluir', novo);
     }
 
     /**
@@ -30,7 +38,7 @@ export abstract class CrudService<T> {
      * @param registro Registro da atualização
      */
     public atualizar(registro: T): Observable<void> {
-        return this.http.put<void>(this.url + '/atualizar', registro);
+        return this.http.put<void>(this.baseUrl + this.url + '/atualizar', registro);
     }
 
     /**
@@ -38,7 +46,7 @@ export abstract class CrudService<T> {
      * @returns Vetor com todos os registro do objeto
      */
     public pesquisarTodos(): Observable<T[]> {
-        return this.http.get<T[]>(this.url + '/pesquisar-todos');
+        return this.http.get<T[]>(this.baseUrl + this.url + '/pesquisar-todos');
     }
 
     /**
@@ -47,7 +55,7 @@ export abstract class CrudService<T> {
      * @param id Identificador do registro
      */
     public carregar(id: number): Observable<T> {
-        return this.http.get<T>(this.url + '/' + id);
+        return this.http.get<T>(this.baseUrl + this.url + '/' + id);
     }
 
     /**
@@ -56,7 +64,7 @@ export abstract class CrudService<T> {
      * @param id Identificador do registro
      */
     public remover(id: number): Observable<void> {
-        return this.http.delete<void>(this.url + '/' + id);
+        return this.http.delete<void>(this.baseUrl + this.url + '/' + id);
     }
 
 }

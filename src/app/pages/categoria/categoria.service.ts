@@ -19,28 +19,4 @@ export class CategoriaService extends CrudService<Categoria> {
         return of({ descricao: '' });
     }
 
-    /**
-     * @description MOCK FAVOR REMOVER
-     */
-    public incluir(novo: Categoria): Observable<void> {
-        return new Observable(observer => {
-            setTimeout(() => {
-                // observer.next();
-                observer.error("Oops! Não foi possível salvar o registro... :(");
-                observer.complete();
-            }, 600);
-        })
-    }
-
-    /**
-     * @description MOCK FAVOR REMOVER
-     */
-    public pesquisarTodos(): Observable<Categoria[]> {
-        return of([
-            { id: 1, descricao: 'MOCK' },
-            { id: 2, descricao: 'NÃO É MOCK >:(' },
-            { id: 3, descricao: 'É MOCK SIM :p' },
-        ])
-    }
-
 }

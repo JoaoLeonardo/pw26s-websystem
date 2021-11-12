@@ -65,7 +65,7 @@ export class CardArtigoCabecalhoComponent extends AdvancedCrudCard<Artigo> imple
     criarForm(): FormGroup {
         return this.formBuilder.group({
             titulo: [null, Validators.required],
-            descricao: [null, [Validators.required, ArtigoDescricaoValidator]], // TODO: Validator (max: 140 caracteres)
+            descricao: [null, [Validators.required, ArtigoDescricaoValidator]],
             palavrasChave: [null, Validators.required],
             categoria: [null]
         })
@@ -86,7 +86,7 @@ export class CardArtigoCabecalhoComponent extends AdvancedCrudCard<Artigo> imple
 
         if (event.value && event.value.length > 0) {
             palavrasChave.push(event.value);
-            this.form.get('palavrasChave')!.setValue(palavrasChave || [event.value]);
+            this.form.get('palavrasChave')!.setValue(palavrasChave);
             this.palavrasChaveInput.nativeElement.value = '';
         }
     }
