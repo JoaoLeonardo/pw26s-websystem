@@ -14,9 +14,20 @@ export class CategoriaService extends CrudService<Categoria> {
     constructor(public http: HttpClient) {
         super('categoria', http);
     }
-    
+
     public get novoRegistro(): Observable<Categoria> {
         return of({ descricao: '' });
+    }
+
+    /**
+     * @description MOCK FAVOR REMOVER
+     */
+    public pesquisarTodos(): Observable<Categoria[]> {
+        return of([
+            { id: 1, descricao: 'MOCK' },
+            { id: 2, descricao: 'NÃO É MOCK >:(' },
+            { id: 3, descricao: 'É MOCK SIM :p' },
+        ])
     }
 
 }

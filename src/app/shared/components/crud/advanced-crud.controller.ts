@@ -2,9 +2,10 @@ import { Injectable } from "@angular/core";
 
 // aplicação
 import { AdvancedCrudCard } from "./advanced-crud-card";
+import { CrudController } from "./crud.controller";
 
 @Injectable()
-export class AdvancedCrudController<T> {
+export class AdvancedCrudController<T> extends CrudController {
 
     /**
      * @description Armazena os cads da tela
@@ -12,6 +13,7 @@ export class AdvancedCrudController<T> {
     private _cardList: AdvancedCrudCard<T>[];
 
     constructor() { 
+        super();
         this._cardList = [];
     }
 

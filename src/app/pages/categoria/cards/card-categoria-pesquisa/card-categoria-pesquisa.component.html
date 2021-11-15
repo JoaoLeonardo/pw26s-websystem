@@ -37,7 +37,7 @@
             <tr mat-header-row *matHeaderRowDef="columns"></tr>
 
             <!-- Rows -->
-            <tr mat-row (click)="editarRegistro(row)" *matRowDef="let row; columns: columns;"></tr>
+            <tr mat-row (click)="editarRegistro(row.id)" *matRowDef="let row; columns: columns;"></tr>
 
         </table>
     </mat-card-subtitle>

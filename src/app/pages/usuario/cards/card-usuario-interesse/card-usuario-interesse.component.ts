@@ -1,7 +1,6 @@
 
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { of } from 'rxjs';
 
 // material
 import { MatSnackBar } from '@angular/material/snack-bar';
