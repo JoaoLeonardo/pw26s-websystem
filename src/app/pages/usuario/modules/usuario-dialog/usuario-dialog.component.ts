@@ -92,4 +92,13 @@ export class UsuarioDialogComponent implements OnInit {
         this.dialog.open(LoginDialogComponent);
     }
 
+    /**
+     * @description Executa no click do link "Pefil" da dialog
+     * * Fecha essa modal e abre a de login
+     */
+    public onClickLinkPerfil() {
+        this.dialog.closeAll();
+        this.dialog.open(LoginDialogComponent);
+    }
+
 }

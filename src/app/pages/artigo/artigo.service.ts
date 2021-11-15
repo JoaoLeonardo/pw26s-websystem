@@ -19,7 +19,7 @@ export class ArtigoService extends CrudService<Artigo> {
         return of({
             titulo: '',
             descricao: '',
-            palavrasChave: [],
+            palavrasChave: '',
             texto: '',
         });
     }

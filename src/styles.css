@@ -40,7 +40,7 @@ body {
 .button-outline { border: 1px solid #fff !important; }
 .button-outline:hover { background-color: #0000001c; }
 
-.mouse-pointer { cursor: pointer; }
+.mouse-pointer, .sys-link { cursor: pointer; }
 
 .hover-div:hover { 
     background-color: #0000001c;
@@ -60,3 +60,5 @@ body {
 .text-end { text-align: end; }
 
 .icon-offset-top { padding-top: 2px; }
+
+.sys-link { text-decoration: underline; }

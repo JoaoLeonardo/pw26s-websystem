@@ -3,7 +3,6 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 // material
-import { MatChipInputEvent } from '@angular/material/chips';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SysAutocompleteControl } from 'src/app/shared/components/autocomplete/sys-autocomplete';
 
@@ -15,7 +14,7 @@ import { AdvancedCrudController } from 'src/app/shared/components/crud/advanced-
 import { Artigo } from '../../models/artigo';
 import { Categoria } from 'src/app/pages/categoria/models/categoria';
 import { CategoriaService } from 'src/app/pages/categoria/categoria.service';
-import { ArtigoDescricaoValidator } from './validators/artigo-descricao-validator';
+import { MaxLenghtValidator } from 'src/app/shared/validators/max-length-validator';
 
 @Component({
     selector: 'app-card-artigo-cabecalho',
@@ -40,9 +39,9 @@ export class CardArtigoCabecalhoComponent extends AdvancedCrudCard<Artigo> imple
     ) {
         super(crudController, formBuilder);
     }
-    
-    public get palavrasChave(): string[] {
-        return this.form.get('palavrasChave')!.value;
+
+    public get tituloControl() {
+        return this.form.get('titulo');
     }
 
     public get descricaoControl() {
@@ -64,8 +63,8 @@ export class CardArtigoCabecalhoComponent extends AdvancedCrudCard<Artigo> imple
 
     criarForm(): FormGroup {
         return this.formBuilder.group({
-            titulo: [null, Validators.required],
-            descricao: [null, [Validators.required, ArtigoDescricaoValidator]],
+            titulo: [null, [Validators.required, MaxLenghtValidator(80)]],
+            descricao: [null, [Validators.required, MaxLenghtValidator(140)]],
             palavrasChave: [null, Validators.required],
             categoria: [null]
         })
@@ -76,32 +75,6 @@ export class CardArtigoCabecalhoComponent extends AdvancedCrudCard<Artigo> imple
      */
     public onChangeCategoria(val: Categoria) {
         this.categoriaInput.nativeElement.value = val ? val.descricao : ''; 
-    }
-
-    /**
-     * @description Adiciona uma palavra chave no formControl
-     */
-    public adicionarPalavraChave(event: MatChipInputEvent) {
-        const palavrasChave = this.palavrasChave || [];
-
-        if (event.value && event.value.length > 0) {
-            palavrasChave.push(event.value);
-            this.form.get('palavrasChave')!.setValue(palavrasChave);
-            this.palavrasChaveInput.nativeElement.value = '';
-        }
-    }
-
-    /**
-     * @description Remove uma palavra chave do formControl
-     */
-    public removerPalavraChave(palavra: string) {
-        const indexOfPalavra = this.palavrasChave.indexOf(palavra);
-        const palavrasChave = this.palavrasChave || [];
-
-        if (indexOfPalavra >= 0) {
-            palavrasChave.splice(indexOfPalavra, 1);
-            this.form.get('palavrasChave')!.setValue(palavrasChave);
-        }
     }
 
     /**

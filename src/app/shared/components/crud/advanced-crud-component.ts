@@ -49,6 +49,7 @@ export abstract class AdvancedCrudComponent<T> implements CrudComponent<T>, OnIn
                 this.service.novoRegistro.subscribe(res => {
                     this.loading = false;
                     this.registro = res;
+                    this.atualizarCards();
                 }, error => {
                     this.loading = false;
                     this.snackBar.open(error.message, 'Ok');
@@ -58,11 +59,31 @@ export abstract class AdvancedCrudComponent<T> implements CrudComponent<T>, OnIn
     }
 
     /**
+     * @description Atualiza os cards com o novo registro buscado
+     */
+    public atualizarCards() {
+        if (this.crudController.cardList) {
+            this.crudController.cardList.forEach(card => card.setForm(this.registro));
+        }
+    }
+
+    /**
+     * @description Atualiza o registro com os valores dos cards
+     */
+    public atualizarRegistro() {
+        if (this.crudController.cardList) {
+            this.crudController.cardList.forEach(card => card.setRegistro(this.registro));
+        }
+    }
+
+    /**
      * @description Persiste as alteração da inclusão/edição
      * @param isEdicao Flag que indica Update ao invés de Create
      */
     public persistirAlteracoes(isEdicao: boolean): void {
-        if (!this.registro) {
+        if (this.registro) {
+            this.atualizarRegistro();
+        } else {
             return;
         }
 
@@ -116,6 +137,7 @@ export abstract class AdvancedCrudComponent<T> implements CrudComponent<T>, OnIn
         this.service.carregar(registroId).subscribe(res => {
             this.loading = false;
             this.registro = res;
+            this.atualizarCards();
         }, error => {
             this.loading = false;
             this.snackBar.open(error.message, 'Ok');
@@ -135,24 +157,6 @@ export abstract class AdvancedCrudComponent<T> implements CrudComponent<T>, OnIn
             this.loading = false;
             this.snackBar.open(error.message, 'Ok');
         });
-    }
-
-    /**
-     * @description Atualiza os cards com o novo registro buscado
-     */
-    public atualizarCards() {
-        if (this.crudController.cardList) {
-            this.crudController.cardList.forEach(card => card.setForm(this.registro));
-        }
-    }
-
-    /**
-     * @description Atualiza o registro com os valores dos cards
-     */
-    public atualizarRegistro() {
-        if (this.crudController.cardList) {
-            this.crudController.cardList.forEach(card => card.setRegistro(this.registro));
-        }
     }
 
     /**

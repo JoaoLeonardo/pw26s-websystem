@@ -4,7 +4,7 @@ export interface Artigo {
     id?: number;
     titulo: string;
     descricao: string;
-    palavrasChave: string[];
+    palavrasChave: string;
     texto: string;
     categoria?: Categoria;
 }
