@@ -99,5 +99,6 @@
     </mat-stepper>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-    <button mat-button mat-dialog-close>{{buttonLabel}}</button>
+    <button mat-stroked-button mat-dialog-close (click)="onClickBtnLogin()">Já possuo login!</button>
+    <button mat-stroked-button mat-dialog-close color="accent">{{buttonLabel}}</button>
 </mat-dialog-actions>

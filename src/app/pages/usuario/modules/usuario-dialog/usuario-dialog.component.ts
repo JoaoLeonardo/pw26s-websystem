@@ -4,10 +4,12 @@ import { FormGroup } from '@angular/forms';
 // material
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatStepper } from '@angular/material/stepper';
+import { MatDialog } from '@angular/material/dialog';
 
 // aplicação
 import { UsuarioService } from '../../usuario.service';
 import { UsuarioDialogFormBuilder } from './core/usuario-dialog-form-builder';
+import { LoginDialogComponent } from '../login-dialog/login-dialog.component';
 
 @Component({
     selector: 'app-usuario-dialog',
@@ -20,7 +22,7 @@ import { UsuarioDialogFormBuilder } from './core/usuario-dialog-form-builder';
 })
 export class UsuarioDialogComponent implements OnInit {
 
-    @ViewChild(MatStepper) 
+    @ViewChild(MatStepper)
     private stepper?: MatStepper;
 
     /**
@@ -41,7 +43,8 @@ export class UsuarioDialogComponent implements OnInit {
     constructor(
         private usuarioService: UsuarioService,
         private formBuilder: UsuarioDialogFormBuilder,
-        private snackBar: MatSnackBar
+        private snackBar: MatSnackBar,
+        private dialog: MatDialog,
     ) {
         // inicializa o form
         this.form = this.formBuilder.criarForm();
@@ -79,6 +82,14 @@ export class UsuarioDialogComponent implements OnInit {
                 this.snackBar.open(error.message, 'Ok');
             });
         }
+    }
+
+    /**
+     * @description Executa no click do botão "Login" da dialog
+     * * Abre a modal de login
+     */
+    public onClickBtnLogin() {
+        this.dialog.open(LoginDialogComponent);
     }
 
 }
