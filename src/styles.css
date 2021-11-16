@@ -58,6 +58,11 @@ body {
 
 .text-center { text-align: center; }
 .text-end { text-align: end; }
+.text-justify {
+    text-align: justify;
+    text-justify: inter-word;
+}
+
 
 .icon-offset-top { padding-top: 2px; }
 
