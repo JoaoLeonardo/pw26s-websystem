@@ -1,0 +1,39 @@
+<!-- Loading -->
+<div *ngIf="loading; else dvArtigo" class="d-flex justify-center d-pad-top">
+    <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+</div>
+
+<!-- Texto do artigo -->
+<ng-template #dvArtigo>
+    <div *ngIf="artigo" class="d-flex column align-center">
+
+        <!-- Cabeçalho -->
+        <mat-card class="d-m">
+            <mat-card-subtitle class="d-pad-top">
+
+                <!-- Título -->
+                <h3>{{artigo.titulo}}</h3>
+
+                <!-- Descrição -->
+                <p><i>{{artigo.descricao}}</i></p>
+
+                <!-- Categoria -->
+                <p><b>Categoria:</b> {{artigo.categoria!.descricao}}</p>
+
+                <!-- Palavras-chave -->
+                <p><b>Palavras-chave:</b> {{artigo.palavrasChave}}</p>
+
+                <!-- Autor -->
+                <p class="text-end"><b>Escrito por:</b> {{artigo.autor!.nome}} {{artigo.autor!.sobrenome}}</p>
+
+            </mat-card-subtitle>
+        </mat-card>
+
+        <!-- Texto -->
+        <mat-card class="d-m" *ngIf="artigo">
+            <mat-card-subtitle class="d-pad-top text-justify" [innerHtml]="artigo.texto">
+            </mat-card-subtitle>
+        </mat-card>
+
+    </div>
+</ng-template>

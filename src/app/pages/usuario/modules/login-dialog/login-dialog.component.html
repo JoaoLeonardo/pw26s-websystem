@@ -1,0 +1,31 @@
+<mat-dialog-content>
+    <form [formGroup]="form">
+
+        <!-- Label -->
+        <ng-template matStepLabel>Login</ng-template>
+
+        <!-- Email/Username -->
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Email/Nome de usuário</mat-label>
+            <input matInput formControlName="username" placeholder="Digite seu e-mail/nome de usuário..."
+                cdkFocusInitial required>
+        </mat-form-field>
+
+        <!-- Senha -->
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Senha</mat-label>
+            <input matInput formControlName="password" placeholder="Digite sua senha..." type="password" required>
+        </mat-form-field>
+
+        <!-- Loading -->
+        <div *ngIf="loading" class="d-flex justify-center">
+            <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+        </div>
+
+    </form>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button class="d-m-right" (click)="onClickBtnCadastrar()">Cadastrar</button>
+    <button mat-stroked-button color="accent" mat-dialog-close>Cancelar</button>
+</mat-dialog-actions>
