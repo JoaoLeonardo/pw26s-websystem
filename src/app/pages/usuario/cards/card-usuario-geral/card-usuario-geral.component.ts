@@ -22,9 +22,6 @@ export class CardUsuarioGeralComponent extends AdvancedCrudCard<Usuario> {
         super(crudController, formBuilder);
     }
 
-    /**
-     * @description Retorna um novo form
-     */
     criarForm(): FormGroup {
         return this.formBuilder.group({
             nome: [null, Validators.required],

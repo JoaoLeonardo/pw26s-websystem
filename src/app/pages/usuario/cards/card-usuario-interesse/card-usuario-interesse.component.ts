@@ -1,5 +1,5 @@
 
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
 // material
@@ -9,6 +9,7 @@ import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 // shared
 import { AdvancedCrudCard } from 'src/app/shared/components/crud/advanced-crud-card';
 import { AdvancedCrudController } from 'src/app/shared/components/crud/advanced-crud.controller';
+import { SysAutocompleteControl } from 'src/app/shared/components/autocomplete/sys-autocomplete';
 
 // aplicação
 import { Usuario } from '../../models/usuario';
@@ -20,24 +21,14 @@ import { CategoriaService } from 'src/app/pages/categoria/categoria.service';
     templateUrl: 'card-usuario-interesse.component.html',
     providers: [CategoriaService]
 })
-export class CardUsuarioIntesseComponent extends AdvancedCrudCard<Usuario> {
+export class CardUsuarioIntesseComponent extends AdvancedCrudCard<Usuario> implements OnInit {
 
     @ViewChild('interessesInput') interessesInput!: ElementRef<HTMLInputElement>;
 
     /**
-     * @description Armazena todos os interesses buscados
+     * @description Classe de controle do auto-complete de interesses
      */
-    public listaTodosInteresses: Categoria[];
-
-    /**
-     * @description Armazena os interesses filtrados
-     */
-    public listaInteressesFiltrados: Categoria[];
-
-    /**
-     * @description Flag que identifica o estado de "carregamento"
-     */
-    public loading: boolean;
+    public interesseAutocomplete!: SysAutocompleteControl;
 
     constructor(
         private categoriaService: CategoriaService,
@@ -46,42 +37,24 @@ export class CardUsuarioIntesseComponent extends AdvancedCrudCard<Usuario> {
         public formBuilder: FormBuilder,
     ) {
         super(crudController, formBuilder);
+    }
 
-        // inicia as variáveis usadas no template
-        this.listaTodosInteresses = [];
-        this.listaInteressesFiltrados = [];
-        this.loading = false;
+    ngOnInit(): void {
+        this.registerControls();
+    }
 
-        // busca as categorias
-        this.buscarCategorias();
+    private registerControls() {
+        this.interesseAutocomplete = new SysAutocompleteControl(this.categoriaService.pesquisarTodos.bind(this.categoriaService), this.snackBar);
     }
 
     public get listaInteresses(): Categoria[] {
         return this.form.get('interesses')!.value;
     }
 
-    /**
-     * @description Retorna um novo form
-     */
     criarForm(): FormGroup {
         return this.formBuilder.group({
             interesses: [],
         })
-    }
-
-    /**
-     * @description Busca as categorias cadastradas
-     */
-    private buscarCategorias() {
-        this.loading = true;
-        this.categoriaService.pesquisarTodos().subscribe(res => {
-            this.loading = false;
-            this.listaTodosInteresses = res;
-            this.listaInteressesFiltrados = this.listaTodosInteresses;
-        }, error => {
-            this.loading = false;
-            this.snackBar.open(error.message, 'Ok');
-        });
     }
 
     /**
@@ -113,7 +86,13 @@ export class CardUsuarioIntesseComponent extends AdvancedCrudCard<Usuario> {
             listaInteresses.splice(index, 1);
             this.form.get('interesses')!.setValue(listaInteresses);
         }
+    }
 
+    /**
+     * @description Filtra o auto-complete de interesse
+     */
+    public filtrarInteresse() {
+        this.interesseAutocomplete.filtrar(this.interessesInput.nativeElement.value);
     }
 
 }

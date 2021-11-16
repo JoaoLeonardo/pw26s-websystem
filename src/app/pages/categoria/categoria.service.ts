@@ -14,22 +14,9 @@ export class CategoriaService extends CrudService<Categoria> {
     constructor(public http: HttpClient) {
         super('categoria', http);
     }
-    
+
     public get novoRegistro(): Observable<Categoria> {
         return of({ descricao: '' });
-    }
-
-    /**
-     * @description MOCK FAVOR REMOVER
-     */
-    public incluir(novo: Categoria): Observable<void> {
-        return new Observable(observer => {
-            setTimeout(() => {
-                // observer.next();
-                observer.error("Oops! Não foi possível salvar o registro... :(");
-                observer.complete();
-            }, 600);
-        })
     }
 
     /**

@@ -8,6 +8,7 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 // aplicação
 import { CrudService } from "./crud.service";
 import { CrudComponent } from "./crud-component";
+import { CrudController } from "./crud.controller";
 
 @Injectable()
 export abstract class BasicCrudComponent<T> implements CrudComponent<T>, OnInit {
@@ -23,6 +24,7 @@ export abstract class BasicCrudComponent<T> implements CrudComponent<T>, OnInit 
     public loading: boolean;
 
     constructor(
+        public controller: CrudController,
         public formBuilder: FormBuilder,
         public service: CrudService<T>,
         public snackBar: MatSnackBar,
@@ -85,6 +87,7 @@ export abstract class BasicCrudComponent<T> implements CrudComponent<T>, OnInit 
             this.service.incluir(registro).subscribe(() => {
                 this.loading = false;
                 this.snackBar.open('O registro foi incluído com sucesso!', 'Ok');
+                this.controller.notificarOperacaoConcluida();
             }, error => {
                 this.loading = false;
                 this.snackBar.open(error.message, 'Ok');
@@ -102,6 +105,7 @@ export abstract class BasicCrudComponent<T> implements CrudComponent<T>, OnInit 
             this.service.atualizar(registro).subscribe(() => {
                 this.loading = false;
                 this.snackBar.open('As alterações foram salvas com sucesso!', 'Ok');
+                this.controller.notificarOperacaoConcluida();
             }, error => {
                 this.loading = false;
                 this.snackBar.open(error.message, 'Ok');

@@ -14,11 +14,13 @@ import { Categoria } from './models/categoria';
 import { CategoriaService } from './categoria.service';
 import { CardCategoriaEdicaoComponent } from './cards/card-categoria-edicao/card-categoria-edicao.component';
 import { CardCategoriaPesquisaComponent } from './cards/card-categoria-pesquisa/card-categoria-pesquisa.component';
+import { CrudController } from 'src/app/shared/components/crud/crud.controller';
 
 @Component({
     selector: 'app-categoria',
     templateUrl: 'categoria.page.html',
     providers: [
+        CrudController,
         CategoriaService,
     ]
 })
@@ -36,12 +38,13 @@ export class CategoriaComponent extends BasicCrudComponent<Categoria> implements
     private subscription: Subscription;
 
     constructor(
+        public controller: CrudController,
         public service: CategoriaService,
         public formBuilder: FormBuilder,
         public snackBar: MatSnackBar, 
         public route: ActivatedRoute,
     ) { 
-        super(formBuilder, service, snackBar, route);
+        super(controller, formBuilder, service, snackBar, route);
         this.subscription = new Subscription();
     }
 

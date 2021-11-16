@@ -15,6 +15,7 @@ import { MatIconModule } from '@angular/material/icon';
 
 // aplicação
 import { UsuarioDialogComponent } from './usuario-dialog.component';
+import { LoginDialogModule } from '../login-dialog/login-dialog.module';
 
 @NgModule({
     imports: [
@@ -32,6 +33,9 @@ import { UsuarioDialogComponent } from './usuario-dialog.component';
         MatDialogModule,
         MatInputModule,
         MatIconModule,
+
+        // aplicação
+        LoginDialogModule,
     ],
     exports: [UsuarioDialogComponent],
     declarations: [UsuarioDialogComponent],

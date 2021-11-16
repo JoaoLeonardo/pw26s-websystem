@@ -44,13 +44,15 @@
                 <!-- Nome de usuário -->
                 <mat-form-field class="full-width" appearance="fill">
                     <mat-label>Nome de usuário</mat-label>
-                    <input matInput formControlName="username" placeholder="Digite aqui como devemos chamá-lo..." required>
+                    <input matInput formControlName="username" placeholder="Digite aqui como devemos chamá-lo..."
+                        required>
                 </mat-form-field>
 
                 <!-- Senha -->
                 <mat-form-field class="full-width" appearance="fill">
                     <mat-label>Senha</mat-label>
-                    <input matInput formControlName="password" placeholder="Digite sua senha..." type="password" required>
+                    <input matInput formControlName="password" placeholder="Digite sua senha..." type="password"
+                        required>
                 </mat-form-field>
 
                 <!-- Confirmação da senha -->
@@ -90,14 +92,15 @@
                 <div class="text-center">
                     <mat-icon class="d-pad text-sucess" aria-hidden="false">done_outline</mat-icon>
                     <h2><b>Você foi cadastrado com sucesso!</b></h2>
-                    <p>Acesse seu <a href="">perfil</a> para mais informações</p>
+                    <p>Acesse seu <a class="sys-link" (click)="onClickLinkPerfil()">perfil</a> para mais informações</p>
                 </div>
             </ng-template>
-            
+
         </mat-step>
 
     </mat-stepper>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-    <button mat-button mat-dialog-close>{{buttonLabel}}</button>
+    <button mat-stroked-button mat-dialog-close (click)="onClickBtnLogin()">Já possuo login!</button>
+    <button mat-stroked-button mat-dialog-close color="accent">{{buttonLabel}}</button>
 </mat-dialog-actions>

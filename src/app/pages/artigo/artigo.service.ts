@@ -12,14 +12,14 @@ import { Artigo } from './models/artigo';
 export class ArtigoService extends CrudService<Artigo> {
 
     constructor(public http: HttpClient) {
-        super('usuario', http);
+        super('artigo', http);
     }
 
     public get novoRegistro(): Observable<Artigo> {
         return of({
             titulo: '',
             descricao: '',
-            palavrasChave: [],
+            palavrasChave: '',
             texto: '',
         });
     }

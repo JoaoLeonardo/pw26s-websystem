@@ -1,6 +1,6 @@
 <div class="row justify-evenly artigos-row overflow-x">
 
-    <div *ngFor="let artigo of listaArtigos"
+    <div *ngFor="let artigo of listaArtigos" [routerLink]="['/artigo-publicado', artigo.id]"
         class="d-m d-pad artigos-row-item hover-div column justify-between mouse-pointer">
         <span><b>{{artigo.titulo}}</b></span>
         <span class="text-end">Por {{artigo.autor}}</span>
