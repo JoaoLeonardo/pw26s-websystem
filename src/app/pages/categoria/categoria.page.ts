@@ -59,7 +59,7 @@ export class CategoriaComponent extends BasicCrudComponent<Categoria> implements
         this.subscription.add(this.cardEdicao.removerRegistroEvent.subscribe(this.removerRegistro.bind(this)));
         // events do card de pesquisa
         this.subscription.add(this.cardPesquisa.editarRegistroEvent.subscribe(super.carregar.bind(this)));
-        this.subscription.add(this.cardPesquisa.editarRegistroEvent.subscribe(this.removerRegistro.bind(this)));
+        this.subscription.add(this.cardPesquisa.removerRegistroEvent.subscribe(this.removerRegistro.bind(this)));
     }
 
     public criarForm(): FormGroup {
