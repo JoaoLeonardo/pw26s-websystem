@@ -10,6 +10,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { UsuarioService } from '../../usuario.service';
 import { UsuarioDialogFormBuilder } from './core/usuario-dialog-form-builder';
 import { LoginDialogComponent } from '../login-dialog/login-dialog.component';
+import { StepperSelectionEvent } from '@angular/cdk/stepper';
 
 @Component({
     selector: 'app-usuario-dialog',
@@ -99,6 +100,17 @@ export class UsuarioDialogComponent implements OnInit {
     public onClickLinkPerfil() {
         this.dialog.closeAll();
         this.dialog.open(LoginDialogComponent);
+    }
+
+    /**
+     * @description Executa no click dos steps (do stepper)
+     * * Trata os eventos de acordo com o índice do step
+     */
+    public onChangeStepperSelection(event: StepperSelectionEvent) {
+        if (event.selectedIndex === 2 && this.loading === false) {
+            // força a execução do cadastro
+            this.onClickBtnCadastrar();
+        }
     }
 
 }
