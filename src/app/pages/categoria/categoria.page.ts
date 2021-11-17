@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -24,7 +24,7 @@ import { CrudController } from 'src/app/shared/components/crud/crud.controller';
         CategoriaService,
     ]
 })
-export class CategoriaComponent extends BasicCrudComponent<Categoria> implements AfterViewInit {
+export class CategoriaComponent extends BasicCrudComponent<Categoria> implements AfterViewInit, OnDestroy {
 
     @ViewChild(CardCategoriaEdicaoComponent)
     private cardEdicao!: CardCategoriaEdicaoComponent;
@@ -79,6 +79,10 @@ export class CategoriaComponent extends BasicCrudComponent<Categoria> implements
         if (this.form.get('id')?.value === id) {
             this.form.reset();
         }
+    }
+
+    ngOnDestroy(): void {
+        this.subscription.unsubscribe();
     }
 
 }
