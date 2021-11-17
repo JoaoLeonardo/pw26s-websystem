@@ -52,10 +52,26 @@ export abstract class LoginService {
      */
     public login(request: LoginRequest): Observable<number> {
         return new Observable(observer => {
-            this.http.post<LoginInfo>(this._url, request).subscribe(res => {
+            this.http.post<LoginInfo>(this._url + '/logar', request).subscribe(res => {
                 observer.next(res.userId);
                 observer.complete();
                 this._loginEvent.next(res);
+            }, error => {
+                observer.error(error);
+                observer.complete();
+            })
+        });
+    }
+
+    /**
+     * @description Desloga do sistema
+     */
+     public deslogar(): Observable<void> {
+        return new Observable(observer => {
+            this.http.post<void>(this._url + '/deslogar', this._loginInfo?.userId).subscribe(() => {
+                observer.next();
+                observer.complete();
+                this._loginEvent.next(undefined);
             }, error => {
                 observer.error(error);
                 observer.complete();
