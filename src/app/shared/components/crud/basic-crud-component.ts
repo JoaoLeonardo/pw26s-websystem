@@ -137,6 +137,7 @@ export abstract class BasicCrudComponent<T> implements CrudComponent<T>, OnInit 
         this.service.remover(registroId).subscribe(() => {
             this.loading = false;
             this.snackBar.open('O registro foi excluído com sucesso!', 'Ok');
+            this.controller.notificarOperacaoConcluida();
         }, error => {
             this.loading = false;
             this.snackBar.open(error.message, 'Ok');

@@ -16,7 +16,8 @@
 
             <!-- Campo (texto) -->
             <mat-form-field *ngIf="!slideChecked; else visualizacaoTexto" class="full-width" appearance="fill">
-                <textarea matInput formControlName="texto" placeholder="Digite seu texto como HTML..." [rows]="15" required></textarea>
+                <textarea #textoAutosize matInput formControlName="texto" placeholder="Digite seu texto como HTML..."
+                    cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="15" required></textarea>
             </mat-form-field>
 
             <!-- Texto como HTML -->

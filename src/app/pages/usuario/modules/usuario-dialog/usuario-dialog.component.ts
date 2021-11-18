@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 // material
+import { StepperSelectionEvent } from '@angular/cdk/stepper';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatStepper } from '@angular/material/stepper';
 import { MatDialog } from '@angular/material/dialog';
@@ -10,7 +11,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { UsuarioService } from '../../usuario.service';
 import { UsuarioDialogFormBuilder } from './core/usuario-dialog-form-builder';
 import { LoginDialogComponent } from '../login-dialog/login-dialog.component';
-import { StepperSelectionEvent } from '@angular/cdk/stepper';
 
 @Component({
     selector: 'app-usuario-dialog',
@@ -107,8 +107,8 @@ export class UsuarioDialogComponent implements OnInit {
      * * Trata os eventos de acordo com o índice do step
      */
     public onChangeStepperSelection(event: StepperSelectionEvent) {
-        if (event.selectedIndex === 2 && this.loading === false) {
-            // força a execução do cadastro
+        if (event.selectedIndex == 2) {
+            // executa o cadastrar se for o último step
             this.onClickBtnCadastrar();
         }
     }
