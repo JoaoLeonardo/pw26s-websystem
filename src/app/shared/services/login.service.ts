@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http"
+import { HttpClient, HttpHeaders } from "@angular/common/http"
 import { Observable, Subject } from "rxjs";
 
 // environment
@@ -15,7 +15,7 @@ export abstract class LoginService {
     /**
      * @description Armazena a url base do sistema
      */
-    private _url = environment.api + 'login';
+    private _url = environment.api;
 
     /**
      * @description Armazena as informações do usuário logado
@@ -52,7 +52,14 @@ export abstract class LoginService {
      */
     public login(request: LoginRequest): Observable<number> {
         return new Observable(observer => {
-            this.http.post<LoginInfo>(this._url + '/logar', request).subscribe(res => {
+            if (!request) {
+                observer.error({ message: 'É obrigatório informar um nome de usuário e uma senha para logar no sistema.' });
+                observer.complete();
+            }
+
+            const headers = new HttpHeaders({ authorization: 'Basic ' + btoa(request.username + ':' + request.password) });
+
+            this.http.post<LoginInfo>(this._url + '/login', headers).subscribe(res => {
                 observer.next(res.userId);
                 observer.complete();
                 this._loginEvent.next(res);
@@ -66,9 +73,9 @@ export abstract class LoginService {
     /**
      * @description Desloga do sistema
      */
-     public deslogar(): Observable<void> {
+    public logout(): Observable<void> {
         return new Observable(observer => {
-            this.http.post<void>(this._url + '/deslogar', this._loginInfo?.userId).subscribe(() => {
+            this.http.post<void>(this._url + '/logout', {}).subscribe(() => {
                 observer.next();
                 observer.complete();
                 this._loginEvent.next(undefined);
