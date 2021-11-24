@@ -59,7 +59,7 @@ export abstract class LoginService {
 
             const headers = new HttpHeaders({ authorization: 'Basic ' + btoa(request.username + ':' + request.password) });
 
-            this.http.post<{ name: string }>(this._url + '/login', headers).subscribe(res => {
+            this.http.post<{ name: string }>(this._url + 'login', headers).subscribe(res => {
                 this._isAuthenticated = res != null && res['name'] != null;
                 this._loginEvent.next(this._isAuthenticated);
                 observer.next(this._isAuthenticated);
@@ -76,7 +76,7 @@ export abstract class LoginService {
      */
     public logout(): Observable<void> {
         return new Observable(observer => {
-            this.http.post<void>(this._url + '/logout', {}).subscribe(() => {
+            this.http.post<void>(this._url + 'logout', {}).subscribe(() => {
                 observer.next();
                 observer.complete();
                 this._isAuthenticated = false;
