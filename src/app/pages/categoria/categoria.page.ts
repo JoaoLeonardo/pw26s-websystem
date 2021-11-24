@@ -12,9 +12,9 @@ import { BasicCrudComponent } from 'src/app/shared/components/crud/basic-crud-co
 // aplicação
 import { Categoria } from './models/categoria';
 import { CategoriaService } from './categoria.service';
+import { CrudController } from 'src/app/shared/components/crud/crud.controller';
 import { CardCategoriaEdicaoComponent } from './cards/card-categoria-edicao/card-categoria-edicao.component';
 import { CardCategoriaPesquisaComponent } from './cards/card-categoria-pesquisa/card-categoria-pesquisa.component';
-import { CrudController } from 'src/app/shared/components/crud/crud.controller';
 
 @Component({
     selector: 'app-categoria',

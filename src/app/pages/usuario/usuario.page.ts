@@ -17,12 +17,11 @@ import { UsuarioService } from './usuario.service';
     templateUrl: 'usuario.page.html',
     providers: [
         AdvancedCrudController,
-        UsuarioService,
     ]
 })
 export class UsuarioComponent extends AdvancedCrudComponent<Usuario> implements OnInit {
 
-    constructor(
+    constructor( // TODO carregar pelo usuário logado
         public crudController: AdvancedCrudController<Usuario>,
         public service: UsuarioService,
         public snackBar: MatSnackBar,
@@ -33,6 +32,29 @@ export class UsuarioComponent extends AdvancedCrudComponent<Usuario> implements 
 
     ngOnInit() {
         super.ngOnInit();
+    }
+    
+    /**
+     * @description Sobreescreve o método do AdvancedCrudComponent para evitar requests indevidos
+     */
+    public verificarCrudRouteParams() {
+        this.carregar();
+    }
+
+    /**
+     * @description Sobreescreve o método do AdvancedCrudComponent para evitar requests indevidos
+     */
+    public carregar(): void {
+        this.loading = true;
+        this.service.logado().subscribe(res => {
+            this.loading = false;
+            this.registro = res;
+            this.crudController.notificarCarga();
+            this.atualizarCards();
+        }, error => {
+            this.loading = false;
+            this.snackBar.open(error.message, 'Ok');
+        });
     }
 
 }

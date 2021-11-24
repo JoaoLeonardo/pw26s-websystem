@@ -138,6 +138,7 @@ export abstract class AdvancedCrudComponent<T> implements CrudComponent<T>, OnIn
         this.service.carregar(registroId).subscribe(res => {
             this.loading = false;
             this.registro = res;
+            this.crudController.notificarCarga();
             this.atualizarCards();
         }, error => {
             this.loading = false;
