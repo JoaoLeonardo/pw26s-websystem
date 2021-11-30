@@ -7,6 +7,7 @@ import { environment } from "src/environments/environment";
 
 // aplicação
 import { LoginRequest } from "../models/login-request";
+import { Router } from "@angular/router";
 
 @Injectable({ providedIn: 'root' })
 export abstract class LoginService {
@@ -17,25 +18,31 @@ export abstract class LoginService {
     private _url = environment.api;
 
     /**
-     * @description Flag que indica usuário logado
-     */
-    private _isAuthenticated: boolean;
-
-    /**
      * @description Evento de login
      */
     private _loginEvent: Subject<boolean>;
 
-    constructor(private http: HttpClient) {
+    constructor(
+        private _http: HttpClient,
+        private _router: Router,
+    ) {
         this._loginEvent = new Subject();
-        this._isAuthenticated = false;
     }
 
     /**
      * @description Retorna as informações do usuário logado
+     * // TODO: tipar
      */
-    public get authInfo(): boolean {
-        return this._isAuthenticated;
+    public get authInfo() {
+        return localStorage.getItem("access_token");
+    }
+
+    /**
+     * @description Retorna true se o usuário estiver autenticado
+     * // TODO: tipar
+     */
+    public get isAuthenticated() {
+        return !!localStorage.getItem("access_token");
     }
 
     /**
@@ -47,7 +54,7 @@ export abstract class LoginService {
 
     /**
      * @description Loga no sistema
-     * @returns Id do usuário
+     * @returns Flag que identifica sucesso do login
      * @param request Request de login com email/username e senha
      */
     public login(request: LoginRequest): Observable<boolean> {
@@ -57,12 +64,21 @@ export abstract class LoginService {
                 observer.complete();
             }
 
-            const headers = new HttpHeaders({ authorization: 'Basic ' + btoa(request.username + ':' + request.password) });
+            const headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
+            const body = 'username=' + request.username + '&password=' + request.password;
 
-            this.http.post<{ name: string }>(this._url + 'login', headers).subscribe(res => {
-                this._isAuthenticated = res != null && res['name'] != null;
-                this._loginEvent.next(this._isAuthenticated);
-                observer.next(this._isAuthenticated);
+            this._http.post<{ access_token: string }>(this._url + 'login', body, { headers: headers }).subscribe(response => {
+                const token = response['access_token'];
+
+                if (response['access_token']) {
+                    localStorage.setItem('access_token', token);
+                } else {
+                    localStorage.removeItem('access_token')
+                }
+
+                // TODO: const user: { sub: string, roles: string[] } = jwtDecode<{ sub: string, roles: string[] }>(token);
+
+                observer.next(true);
                 observer.complete();
             }, error => {
                 observer.error(error);
@@ -74,18 +90,10 @@ export abstract class LoginService {
     /**
      * @description Desloga do sistema
      */
-    public logout(): Observable<void> {
-        return new Observable(observer => {
-            this.http.post<void>(this._url + 'logout', {}).subscribe(() => {
-                observer.next();
-                observer.complete();
-                this._isAuthenticated = false;
-                this._loginEvent.next(this._isAuthenticated);
-            }, error => {
-                observer.error(error);
-                observer.complete();
-            })
-        });
+    public logout() {
+        localStorage.removeItem("access_token");
+        this._loginEvent.next(false);
+        this._router.navigateByUrl("").then(res => res);
     }
 
 }
