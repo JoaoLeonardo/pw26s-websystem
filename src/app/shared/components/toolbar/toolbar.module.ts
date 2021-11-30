@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 
 // material
@@ -17,6 +18,7 @@ import { ToolbarComponent } from './toolbar.component';
     imports: [
         CommonModule,
         BrowserModule,
+        RouterModule,
 
         // material
         MatToolbarModule,

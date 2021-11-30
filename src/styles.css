@@ -32,10 +32,13 @@ body {
 .d-m-right { margin-right: 8px !important; }
 .d-m-left { margin-left: 8px !important; }
 .d-m-bottom { margin-bottom: 8px !important; }
+.d-m-vertical { margin: 8px 0px !important ;}
 .d-pad { padding: 8px !important; }
 .d-pad-right { padding-right: 8px !important; }
 .d-pad-top { padding-top: 8px !important; }
 .d-pad-horizontal { padding: 8px 0px !important; }
+
+.d-pad-card-container { padding: 8px 5vw !important; }
 
 .button-outline { border: 1px solid #fff !important; }
 .button-outline:hover { background-color: #0000001c; }
@@ -67,3 +70,12 @@ body {
 .icon-offset-top { padding-top: 2px; }
 
 .sys-link { text-decoration: underline; }
+
+.border-bottom {
+    border-color: #0000001c;
+    border-style: solid;
+    border-radius: 1px;
+    border-top: 0px;
+    border-right: 0px;
+    border-left: 0px;
+}

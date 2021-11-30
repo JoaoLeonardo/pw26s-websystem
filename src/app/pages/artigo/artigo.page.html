@@ -6,24 +6,30 @@
         <mat-icon class="icon-offset-top">description</mat-icon>
     </h2>
 
-    <!-- Card cabeçalho -->
-    <app-card-artigo-cabecalho class="full-width"></app-card-artigo-cabecalho>
+    <div class="d-pad-card-container">
 
-    <!-- Ações -->
-    <div class="d-flex justify-end d-m">
-        
-        <!-- Spinner -->
-        <mat-progress-spinner *ngIf="loading; else actionButtons" class="d-m-right full-width" mode="indeterminate"></mat-progress-spinner>
+        <!-- Card cabeçalho -->
+        <app-card-artigo-cabecalho class="full-width"></app-card-artigo-cabecalho>
 
-        <!-- Botões -->
-        <ng-template #actionButtons>
-            <button mat-button class="mat-button-sucess d-m-right" (click)="onClickPublicar()">Publicar</button>
-            <button *ngIf="registro.id" mat-button class="mat-button-warn" (click)="onClickRemover()">Excluir</button>
-        </ng-template>
+        <!-- Ações -->
+        <div class="d-flex justify-end d-m-vertical">
+
+            <!-- Spinner -->
+            <mat-progress-spinner *ngIf="loading; else actionButtons" class="d-m-right full-width" mode="indeterminate">
+            </mat-progress-spinner>
+
+            <!-- Botões -->
+            <ng-template #actionButtons>
+                <button mat-button class="mat-button-sucess d-m-right" (click)="onClickPublicar()">Publicar</button>
+                <button *ngIf="registro.id" mat-button class="mat-button-warn"
+                    (click)="onClickRemover()">Excluir</button>
+            </ng-template>
+
+        </div>
+
+        <!-- Card texto -->
+        <app-card-artigo-texto class="full-width"></app-card-artigo-texto>
 
     </div>
-
-    <!-- Card texto -->
-    <app-card-artigo-texto class="full-width"></app-card-artigo-texto>
 
 </div>

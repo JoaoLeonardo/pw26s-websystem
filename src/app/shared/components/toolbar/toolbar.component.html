@@ -9,8 +9,17 @@
 
         <!-- Ações -->
         <div class="row">
+
+            <!-- Ações contextuais -->
             <button class="d-m-right button-outline border-r-hard" mat-stroked-button
                 *ngFor="let action of buttonOptions" (click)="executeAction(action.value)">{{action.label}}</button>
+
+            <!-- Pesquisa (de artigos) -->
+            <button class="d-m-left button-outline" mat-icon-button aria-label="pesquisar"
+                routerLink="pesquisa-artigos">
+                <mat-icon>search</mat-icon>
+            </button>
+
         </div>
 
     </mat-toolbar-row>
