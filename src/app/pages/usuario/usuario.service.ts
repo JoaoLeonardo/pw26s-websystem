@@ -8,10 +8,9 @@ import { CrudService } from 'src/app/shared/components/crud/crud.service';
 // aplicação
 import { Usuario } from './models/usuario';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class UsuarioService extends CrudService<Usuario> {
 
-    // TODO: Validar na carga se o usuário sendo carregado é o mesmo que está logado!!!!
     constructor(public http: HttpClient) {
         super('usuario', http);
     }
@@ -24,6 +23,20 @@ export class UsuarioService extends CrudService<Usuario> {
             username: '',
             password: '',
         });
+    }
+
+    /**
+     * @description Retorna o usuário logado (se houver)
+     */
+    public logado(): Observable<Usuario> {
+        return this.http.get<Usuario>(this.baseUrl + this.url + '/logado');
+    }
+
+    /**
+     * @description Sobreescreve o método do CrudService para impedir requests indevidos
+     */
+    public carregar(id: number): Observable<Usuario> {
+        return this.logado();
     }
 
 }

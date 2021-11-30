@@ -9,6 +9,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatButtonModule } from '@angular/material/button';
+import { MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
@@ -17,6 +18,7 @@ import { MatCardModule } from '@angular/material/card';
 // aplicação
 import { UsuarioComponent } from './usuario.page';
 import { CardUsuarioGeralComponent } from './cards/card-usuario-geral/card-usuario-geral.component';
+import { CardUsuarioArtigosComponent } from './cards/card-usuario-artigos/card-usuario-artigos.component';
 import { CardUsuarioIntesseComponent } from './cards/card-usuario-interesse/card-usuario-interesse.component';
 
 const routes: Routes = [
@@ -37,6 +39,7 @@ const routes: Routes = [
         MatSnackBarModule,
         MatButtonModule,
         MatInputModule,
+        MatTableModule,
         MatChipsModule,
         MatIconModule,
         MatCardModule,
@@ -48,6 +51,7 @@ const routes: Routes = [
         // cards
         CardUsuarioGeralComponent,
         CardUsuarioIntesseComponent,
+        CardUsuarioArtigosComponent,
     ],
     providers: [],
 })

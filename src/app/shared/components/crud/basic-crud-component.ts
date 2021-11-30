@@ -47,22 +47,22 @@ export abstract class BasicCrudComponent<T> implements CrudComponent<T>, OnInit 
      * @description Cria o form do CRUD
      */
     public verificarCrudRouteParams() {
-        this.route.params.subscribe(params => {
-            if (params['id']) {
-                // carrega o registro
-                this.carregar(params['id']);
-            } else {
-                // prepara o form para uma nova inclusão
-                this.loading = true;
-                this.service.novoRegistro.subscribe(res => {
-                    this.loading = false;
-                    this.form.reset(res);
-                }, error => {
-                    this.loading = false;
-                    this.snackBar.open(error.message, 'Ok');
-                });
-            }
-        });
+        const registroId = this.route.snapshot.paramMap.get('id');
+
+        if (registroId) {
+            // carrega o registro
+            this.carregar(+registroId);
+        } else {
+            // prepara o form para uma nova inclusão
+            this.loading = true;
+            this.service.novoRegistro.subscribe(res => {
+                this.loading = false;
+                this.form.reset(res);
+            }, error => {
+                this.loading = false;
+                this.snackBar.open(error.message, 'Ok');
+            });
+        }
     }
 
     /**
@@ -137,6 +137,7 @@ export abstract class BasicCrudComponent<T> implements CrudComponent<T>, OnInit 
         this.service.remover(registroId).subscribe(() => {
             this.loading = false;
             this.snackBar.open('O registro foi excluído com sucesso!', 'Ok');
+            this.controller.notificarOperacaoConcluida();
         }, error => {
             this.loading = false;
             this.snackBar.open(error.message, 'Ok');

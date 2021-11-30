@@ -42,10 +42,10 @@ export class LoginDialogComponent {
     }
 
     /**
-     * @description Executa no click do botão "Cadastrar" do stepper
-     * * Valida o form e cadastra o usuário
+     * @description Executa no click do botão "Login" da dialog
+     * * Valida o form e loga o usuário
      */
-    public onClickBtnCadastrar() {
+    public onClickBtnLogin() {
         this.form.updateValueAndValidity();
 
         if (this.form.valid) {

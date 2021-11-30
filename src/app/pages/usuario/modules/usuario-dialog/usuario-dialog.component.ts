@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 // material
+import { StepperSelectionEvent } from '@angular/cdk/stepper';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatStepper } from '@angular/material/stepper';
 import { MatDialog } from '@angular/material/dialog';
@@ -99,6 +100,17 @@ export class UsuarioDialogComponent implements OnInit {
     public onClickLinkPerfil() {
         this.dialog.closeAll();
         this.dialog.open(LoginDialogComponent);
+    }
+
+    /**
+     * @description Executa no click dos steps (do stepper)
+     * * Trata os eventos de acordo com o índice do step
+     */
+    public onChangeStepperSelection(event: StepperSelectionEvent) {
+        if (event.selectedIndex == 2) {
+            // executa o cadastrar se for o último step
+            this.onClickBtnCadastrar();
+        }
     }
 
 }

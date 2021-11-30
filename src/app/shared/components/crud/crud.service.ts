@@ -11,7 +11,7 @@ export abstract class CrudService<T> {
     /**
      * @description Armazena a url base do sistema
      */
-    private baseUrl = environment.api;
+    public baseUrl = environment.api;
 
     constructor(
         @Inject('url') public url: string,

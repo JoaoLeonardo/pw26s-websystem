@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -12,9 +12,9 @@ import { BasicCrudComponent } from 'src/app/shared/components/crud/basic-crud-co
 // aplicação
 import { Categoria } from './models/categoria';
 import { CategoriaService } from './categoria.service';
+import { CrudController } from 'src/app/shared/components/crud/crud.controller';
 import { CardCategoriaEdicaoComponent } from './cards/card-categoria-edicao/card-categoria-edicao.component';
 import { CardCategoriaPesquisaComponent } from './cards/card-categoria-pesquisa/card-categoria-pesquisa.component';
-import { CrudController } from 'src/app/shared/components/crud/crud.controller';
 
 @Component({
     selector: 'app-categoria',
@@ -24,7 +24,7 @@ import { CrudController } from 'src/app/shared/components/crud/crud.controller';
         CategoriaService,
     ]
 })
-export class CategoriaComponent extends BasicCrudComponent<Categoria> implements AfterViewInit {
+export class CategoriaComponent extends BasicCrudComponent<Categoria> implements AfterViewInit, OnDestroy {
 
     @ViewChild(CardCategoriaEdicaoComponent)
     private cardEdicao!: CardCategoriaEdicaoComponent;
@@ -59,7 +59,7 @@ export class CategoriaComponent extends BasicCrudComponent<Categoria> implements
         this.subscription.add(this.cardEdicao.removerRegistroEvent.subscribe(this.removerRegistro.bind(this)));
         // events do card de pesquisa
         this.subscription.add(this.cardPesquisa.editarRegistroEvent.subscribe(super.carregar.bind(this)));
-        this.subscription.add(this.cardPesquisa.editarRegistroEvent.subscribe(this.removerRegistro.bind(this)));
+        this.subscription.add(this.cardPesquisa.removerRegistroEvent.subscribe(this.removerRegistro.bind(this)));
     }
 
     public criarForm(): FormGroup {
@@ -79,6 +79,10 @@ export class CategoriaComponent extends BasicCrudComponent<Categoria> implements
         if (this.form.get('id')?.value === id) {
             this.form.reset();
         }
+    }
+
+    ngOnDestroy(): void {
+        this.subscription.unsubscribe();
     }
 
 }

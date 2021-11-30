@@ -39,23 +39,24 @@ export abstract class AdvancedCrudComponent<T> implements CrudComponent<T>, OnIn
      * @description Cria o form do CRUD
      */
     public verificarCrudRouteParams() {
-        this.route.params.subscribe(params => {
-            if (params['id']) {
-                // carrega o registro
-                this.carregar(params['id']);
-            } else {
-                // prepara o registro para uma nova inclusão
-                this.loading = true;
-                this.service.novoRegistro.subscribe(res => {
-                    this.loading = false;
-                    this.registro = res;
-                    this.atualizarCards();
-                }, error => {
-                    this.loading = false;
-                    this.snackBar.open(error.message, 'Ok');
-                });
-            }
-        });
+        const registroId = this.route.snapshot.paramMap.get('id');
+
+        if (registroId) {
+            // carrega o registro
+            this.carregar(+registroId);
+        } else {
+            // prepara o registro para uma nova inclusão
+            this.loading = true;
+
+            this.service.novoRegistro.subscribe(res => {
+                this.loading = false;
+                this.registro = res;
+                this.atualizarCards();
+            }, error => {
+                this.loading = false;
+                this.snackBar.open(error.message, 'Ok');
+            });
+        }
     }
 
     /**
@@ -137,6 +138,7 @@ export abstract class AdvancedCrudComponent<T> implements CrudComponent<T>, OnIn
         this.service.carregar(registroId).subscribe(res => {
             this.loading = false;
             this.registro = res;
+            this.crudController.notificarCarga();
             this.atualizarCards();
         }, error => {
             this.loading = false;

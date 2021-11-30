@@ -7,6 +7,7 @@ import { CrudService } from 'src/app/shared/components/crud/crud.service';
 
 // aplicação
 import { Artigo } from './models/artigo';
+import { ArtigoDTO } from '../homepage/models/artigo-dto';
 
 @Injectable()
 export class ArtigoService extends CrudService<Artigo> {
@@ -22,6 +23,14 @@ export class ArtigoService extends CrudService<Artigo> {
             palavrasChave: '',
             texto: '',
         });
+    }
+
+    /**
+     * @description Busca os artigos do usuário logado
+     * @returns Registros gravados pelo usuário logado
+     */
+    public carregarArtigosLogado(): Observable<ArtigoDTO[]> {
+        return this.http.get<ArtigoDTO[]>(this.baseUrl + this.url + '/artigos-usuario');
     }
 
 }

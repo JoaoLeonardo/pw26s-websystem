@@ -4,14 +4,23 @@ import { Observable, Subject } from "rxjs";
 @Injectable()
 export class CrudController {
 
-    public operacaoConcluidaEvent: Subject<void> = new Subject();
+    private _operacaoConcluidaEvent: Subject<void> = new Subject();
+    private _registroCarregadoEvent: Subject<void> = new Subject();
 
     public notificarOperacaoConcluida() {
-        this.operacaoConcluidaEvent.next();
+        this._operacaoConcluidaEvent.next();
     }
 
     public get onOperacaoConcluida(): Observable<void> {
-        return this.operacaoConcluidaEvent.asObservable();
+        return this._operacaoConcluidaEvent.asObservable();
     }
 
+    public notificarCarga() {
+        this._registroCarregadoEvent.next();
+    }
+
+    public get onCarregarRegistro(): Observable<void> {
+        return this._registroCarregadoEvent.asObservable();
+    }
+    
 }
