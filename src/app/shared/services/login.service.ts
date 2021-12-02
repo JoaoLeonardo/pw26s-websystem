@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { Router } from "@angular/router";
 import { HttpClient, HttpHeaders } from "@angular/common/http"
 import { Observable, Subject } from "rxjs";
 
@@ -7,7 +8,6 @@ import { environment } from "src/environments/environment";
 
 // aplicação
 import { LoginRequest } from "../models/login-request";
-import { Router } from "@angular/router";
 
 @Injectable({ providedIn: 'root' })
 export abstract class LoginService {
