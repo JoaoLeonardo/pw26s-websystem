@@ -2,10 +2,9 @@ import { LabelValue } from "src/app/shared/models/label-value";
 
 export enum ToolbarButtonAction {
     HOMEPAGE = 'Homepage',
-    ARTIGOS = 'Artigos',
+    ARTIGO = 'Novo Artigo',
     LOGIN = 'Login/cadastro',
-    PERFIL = 'Perfil',
-    INFO = 'Saiba mais'
+    INFO = 'Saiba +'
 }
 
 export type ToolbarButtonActionType = keyof typeof ToolbarButtonAction;
@@ -35,8 +34,7 @@ export function getToolbarButtonActionLoginOptions(): LabelValue[] {
  */
 export function getToolbarButtonActionLogadoOptions(): LabelValue[] {
     return [
-        { label: ToolbarButtonAction.ARTIGOS, value: 'ARTIGO' },
-        { label: ToolbarButtonAction.PERFIL, value: 'PERFIL' },
+        { label: ToolbarButtonAction.ARTIGO, value: 'ARTIGO' },
         { label: ToolbarButtonAction.INFO, value: 'INFO' },
     ]
 }

@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { ArtigoService } from '../artigo/artigo.service';
 
 // aplicação
 import { ArtigosRowComponent } from './components/artigos-row/artigos-row.component';
@@ -9,7 +10,7 @@ import { HomepageService } from './homepage.service';
     templateUrl: './homepage.page.html',
     styleUrls: ['./homepage.page.scss'],
     providers: [
-        HomepageService,
+        ArtigoService,
     ]
 })
 export class HomepageComponent implements OnInit, AfterViewInit {
@@ -20,7 +21,7 @@ export class HomepageComponent implements OnInit, AfterViewInit {
     @ViewChild('destaquesRow')
     private destaquesRow!: ArtigosRowComponent;
 
-    constructor(private service: HomepageService) { }
+    constructor(private artigoService: ArtigoService) { }
 
     ngOnInit() { }
 
@@ -35,7 +36,7 @@ export class HomepageComponent implements OnInit, AfterViewInit {
     private buscarRecomendacoes(): void {
         if (this.recomendacoesRow) {
             // TODO: validar o usuário logado
-            this.service.getRecomendacoes(0).subscribe(res => this.recomendacoesRow.montarRow(res));
+            this.artigoService.artigosPorDestaque().subscribe(res => this.recomendacoesRow.montarRow(res));
         }
     }
 
@@ -43,7 +44,7 @@ export class HomepageComponent implements OnInit, AfterViewInit {
      * @description Busca os destaques gerais do sistema e seta o resultado na row de destaque
      */
     private buscarDestaques(): void {
-        this.service.getDestaques().subscribe(res => this.destaquesRow.montarRow(res));
+        this.artigoService.artigosRecomendacao(1).subscribe(res => this.destaquesRow.montarRow(res));
     }
 
     /**

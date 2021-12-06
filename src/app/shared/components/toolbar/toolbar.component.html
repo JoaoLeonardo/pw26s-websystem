@@ -15,7 +15,12 @@
                 *ngFor="let action of buttonOptions" (click)="executeAction(action.value)">{{action.label}}</button>
 
             <!-- Pesquisa (de artigos) -->
-            <button class="d-m-left button-outline" mat-icon-button aria-label="pesquisar"
+            <button class="d-m-left d-m-right button-outline" mat-icon-button aria-label="perfil" routerLink="usuario">
+                <mat-icon>manage_accounts</mat-icon>
+            </button>
+
+            <!-- Pesquisa (de artigos) -->
+            <button class="button-outline" mat-icon-button aria-label="pesquisar"
                 routerLink="pesquisa-artigos">
                 <mat-icon>search</mat-icon>
             </button>

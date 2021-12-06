@@ -19,15 +19,4 @@ export class CategoriaService extends CrudService<Categoria> {
         return of({ descricao: '' });
     }
 
-    /**
-     * @description MOCK FAVOR REMOVER
-     */
-    public pesquisarTodos(): Observable<Categoria[]> {
-        return of([
-            { id: 1, descricao: 'MOCK' },
-            { id: 2, descricao: 'NÃO É MOCK >:(' },
-            { id: 3, descricao: 'É MOCK SIM :p' },
-        ])
-    }
-
 }

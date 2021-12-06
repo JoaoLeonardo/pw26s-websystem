@@ -76,8 +76,6 @@ export abstract class LoginService {
                     localStorage.removeItem('access_token')
                 }
 
-                // TODO: const user: { sub: string, roles: string[] } = jwtDecode<{ sub: string, roles: string[] }>(token);
-
                 observer.next(true);
                 observer.complete();
             }, error => {

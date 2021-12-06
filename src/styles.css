@@ -79,3 +79,8 @@ body {
     border-right: 0px;
     border-left: 0px;
 }
+
+.mat-icon-button {
+    width: 44px !important;
+    height: 44px !important;
+}
