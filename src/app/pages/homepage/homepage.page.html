@@ -12,7 +12,7 @@
 </div>
 
 <!-- Recomendações -->
-<div class="d-pad">
+<div class="d-pad" [ngStyle]="{'display': isAuthenticated ? '' : 'none'}">
     <h3><b>Recomendado para você:</b></h3>
     <app-artigos-row #recomendacoesRow class="full-width"></app-artigos-row>
 </div>

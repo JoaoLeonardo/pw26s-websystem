@@ -64,7 +64,7 @@ export abstract class LoginService {
                 observer.complete();
             }
 
-            const headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
+            const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
             const body = 'username=' + request.username + '&password=' + request.password;
 
             this._http.post<{ access_token: string }>(this._url + 'login', body, { headers: headers }).subscribe(response => {
@@ -76,7 +76,9 @@ export abstract class LoginService {
                     localStorage.removeItem('access_token')
                 }
 
-                observer.next(true);
+
+                observer.next(this.isAuthenticated);
+                this._loginEvent.next(this.isAuthenticated);
                 observer.complete();
             }, error => {
                 observer.error(error);

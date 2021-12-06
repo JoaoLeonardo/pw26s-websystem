@@ -14,14 +14,24 @@
             <button class="d-m-right button-outline border-r-hard" mat-stroked-button
                 *ngFor="let action of buttonOptions" (click)="executeAction(action.value)">{{action.label}}</button>
 
-            <!-- Pesquisa (de artigos) -->
-            <button class="d-m-left d-m-right button-outline" mat-icon-button aria-label="perfil" routerLink="usuario">
+            <!-- Divider -->
+            <mat-divider class="d-m-horizontal" [vertical]="true"></mat-divider>
+
+            <!-- Pefil -->
+            <button *ngIf="isAuthenticated" [matMenuTriggerFor]="perfilMenu" class="d-m-horizontal button-outline"
+                mat-icon-button aria-label="perfil">
                 <mat-icon>manage_accounts</mat-icon>
             </button>
 
+            <!-- Ações do perfil -->
+            <mat-menu #perfilMenu="matMenu" class="text-center">
+                <button mat-menu-item routerLink="usuario">Acessar perfil</button>
+                <mat-divider></mat-divider>
+                <button mat-menu-item (click)="executeAction(logoutOpt)">Desconectar</button>
+            </mat-menu>
+
             <!-- Pesquisa (de artigos) -->
-            <button class="button-outline" mat-icon-button aria-label="pesquisar"
-                routerLink="pesquisa-artigos">
+            <button class="button-outline" mat-icon-button aria-label="pesquisar" routerLink="pesquisa-artigos">
                 <mat-icon>search</mat-icon>
             </button>
 

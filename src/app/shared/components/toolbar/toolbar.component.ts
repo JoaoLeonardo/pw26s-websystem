@@ -20,13 +20,14 @@ import { LabelValue } from '../../models/label-value';
 })
 export class ToolbarComponent implements OnInit, OnDestroy {
 
-    // enum options
-    public buttonOptions: LabelValue[];
-
     /**
      * @description Flag que identifica usuário logado
      */
     public isAuthenticated: boolean;
+
+    // enum options
+    public buttonOptions: LabelValue[];
+    public logoutOpt: ToolbarButtonActionType;
 
     /**
      * @description Armazena as incrições de eventos do componente
@@ -40,6 +41,7 @@ export class ToolbarComponent implements OnInit, OnDestroy {
     ) {
         // inicializa os enums
         this.buttonOptions = getToolbarButtonActionLoginOptions();
+        this.logoutOpt = 'LOGOUT';
         // inicializa as variáves do template
         this.isAuthenticated = false;
         // inicializa o subscription
@@ -64,6 +66,7 @@ export class ToolbarComponent implements OnInit, OnDestroy {
      * @description Executado no evento de login (bem sucedido)
      */
     private onLoginEvent() {
+        console.log(this.isAuthenticated);
         this.isAuthenticated = this.loginService.isAuthenticated;
 
         if (this.loginService.isAuthenticated) {
@@ -82,8 +85,11 @@ export class ToolbarComponent implements OnInit, OnDestroy {
             case 'LOGIN':
                 this.dialog.open(UsuarioDialogComponent);
                 break;
+            case 'LOGOUT':
+                this.loginService.logout();
+                break;
             case 'ARTIGO':
-                this.router.navigateByUrl('artigo')
+                this.router.navigateByUrl('artigo');
                 break;
             case 'INFO':
                 window.open('https://github.com/JoaoLeonardo/pw26s-websystem');

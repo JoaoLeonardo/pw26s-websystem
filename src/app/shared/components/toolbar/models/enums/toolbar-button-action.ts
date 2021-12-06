@@ -4,6 +4,7 @@ export enum ToolbarButtonAction {
     HOMEPAGE = 'Homepage',
     ARTIGO = 'Novo Artigo',
     LOGIN = 'Login/cadastro',
+    LOGOUT = 'Desconectar',
     INFO = 'Saiba +'
 }
 
