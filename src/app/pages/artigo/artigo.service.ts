@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 // shared
 import { CrudService } from 'src/app/shared/components/crud/crud.service';
@@ -44,15 +45,26 @@ export class ArtigoService extends CrudService<Artigo> {
      * @description Busca os detaques gerais do sistema
      */
     public artigosPorDestaque(): Observable<ArtigoDTO[]> {
-        return this.http.get<ArtigoDTO[]>(this.baseUrl + this.url + '/destaque');
+        return this.http.get<ArtigoDTO[]>(this.baseUrl + this.url + '/destaque').pipe(
+            // TODO: Remover quando finalizado DTO na api
+            map(destaques => destaques.map((destaque: any) => {
+                destaque.autor = destaque.autor ? `${destaque.autor['nome']} - ${destaque.autor['sobrenome']}` : 'sem dados';
+                return destaque;
+            }))
+        );
     }
 
     /**
      * @description Busca as recomendações do usuário logado
-     * @param usuarioId Identificador do usuário (TODO: Remover, a api tem que buscar pelo logado)
      */
-    public artigosRecomendacao(usuarioId: number): Observable<ArtigoDTO[]> {
-        return this.http.get<ArtigoDTO[]>(this.baseUrl + this.url + '/recomendacao/' + usuarioId);
+    public artigosRecomendacao(): Observable<ArtigoDTO[]> {
+        return this.http.get<ArtigoDTO[]>(this.baseUrl + this.url + '/recomendacao').pipe(
+            // TODO: Remover quando finalizado DTO na api
+            map(destaques => destaques.map((destaque: any) => {
+                destaque.autor = destaque.autor ? `${destaque.autor['nome']} - ${destaque.autor['sobrenome']}` : 'sem dados';
+                return destaque;
+            }))
+        );
     }
 
 }

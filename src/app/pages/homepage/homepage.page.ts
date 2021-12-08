@@ -65,7 +65,6 @@ export class HomepageComponent implements OnInit, AfterViewInit, OnDestroy {
      */
     private buscarRecomendacoes(): void {
         if (this.recomendacoesRow && this.loginService.isAuthenticated) {
-            // TODO: validar o usuário logado
             this.artigoService.artigosPorDestaque().subscribe(res => this.recomendacoesRow.montarRow(res));
         }
     }
@@ -74,7 +73,7 @@ export class HomepageComponent implements OnInit, AfterViewInit, OnDestroy {
      * @description Busca os destaques gerais do sistema e seta o resultado na row de destaque
      */
     private buscarDestaques(): void {
-        this.artigoService.artigosRecomendacao(1).subscribe(res => this.destaquesRow.montarRow(res));
+        this.artigoService.artigosRecomendacao().subscribe(res => this.destaquesRow.montarRow(res));
     }
 
     /**
