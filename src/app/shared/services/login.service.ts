@@ -76,7 +76,6 @@ export abstract class LoginService {
                     localStorage.removeItem('access_token')
                 }
 
-
                 observer.next(this.isAuthenticated);
                 this._loginEvent.next(this.isAuthenticated);
                 observer.complete();
