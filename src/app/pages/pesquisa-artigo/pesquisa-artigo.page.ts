@@ -82,7 +82,6 @@ export class PesquisaArtigoComponent implements OnInit {
                 this.snackBar.open('Não foi possível encontrar nenhum registro correspondente ao filtro informado!', 'Ok');
             }
         }, error => {
-            this.listaResultado = [{ id: 1, titulo: 'Artigo 1', autor: 'Teste testado' }, { id: 2, titulo: 'Artigo 2', autor: 'Teste testado' }];
             this.loading = false;
             this.snackBar.open(error.message, 'Ok');
         });
