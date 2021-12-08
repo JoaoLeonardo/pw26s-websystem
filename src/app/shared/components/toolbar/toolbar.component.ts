@@ -66,7 +66,6 @@ export class ToolbarComponent implements OnInit, OnDestroy {
      * @description Executado no evento de login (bem sucedido)
      */
     private onLoginEvent() {
-        console.log(this.isAuthenticated);
         this.isAuthenticated = this.loginService.isAuthenticated;
 
         if (this.loginService.isAuthenticated) {

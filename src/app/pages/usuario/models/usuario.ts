@@ -1,3 +1,7 @@
+// shared
+import { Permissao } from "src/app/shared/models/permissao";
+
+// aplicação
 import { Categoria } from "../../categoria/models/categoria";
 
 export interface Usuario {
@@ -7,6 +11,6 @@ export interface Usuario {
     email: string;
     username: string;
     password: string;
-    permissoes?: any[];
+    permissoes?: Permissao[];
     interesses?: Categoria[];
 }
