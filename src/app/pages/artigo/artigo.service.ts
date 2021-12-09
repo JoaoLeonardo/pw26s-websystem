@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -38,7 +38,8 @@ export class ArtigoService extends CrudService<Artigo> {
      * @description Filtra os artigos por título e palavras-chave
      */
     public pesquisarArtigos(filtro: string): Observable<ArtigoDTO[]> {
-        return this.http.post<ArtigoDTO[]>(this.baseUrl + this.url + '/filtro/titulo-chave', filtro);
+        const params: HttpParams = new HttpParams().append('filtro', filtro);
+        return this.http.post<ArtigoDTO[]>(this.baseUrl + this.url + '/filtro/titulo-chave', { params: params });
     }
 
     /**
