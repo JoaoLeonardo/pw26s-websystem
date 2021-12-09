@@ -17,7 +17,7 @@ export abstract class AbsctractRoleGuard implements CanActivate {
         public loginService: LoginService,
         public snackBar: MatSnackBar,
         public router: Router,
-        @Inject('role') public role: string,
+        @Inject('role') public roles: string[],
     ) { }
 
     canActivate(
@@ -27,7 +27,7 @@ export abstract class AbsctractRoleGuard implements CanActivate {
         return new Observable<boolean>(observer => {
             if (this.loginService.isAuthenticated) {
                 this.usuarioService.logado().subscribe(res => {
-                    const hasPermission = res.permissoes?.find(permissao => permissao.nome === this.role) != null;
+                    const hasPermission = res.permissoes?.find(permissao => this.roles.find(role => role === permissao.nome)) != null;
                     
                     observer.next(hasPermission);
                     observer.complete();

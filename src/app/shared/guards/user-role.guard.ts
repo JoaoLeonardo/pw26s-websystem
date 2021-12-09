@@ -18,7 +18,7 @@ export class UserRoleGuard extends AbsctractRoleGuard {
         public snackBar: MatSnackBar,
         public router: Router,
     ) {
-        super(usuarioService, loginService, snackBar, router, 'ROLE_USER');
+        super(usuarioService, loginService, snackBar, router, ['ROLE_USER', 'ROLE_ADMIN']);
     }
 
 }
