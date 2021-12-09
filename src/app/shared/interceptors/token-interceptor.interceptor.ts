@@ -14,6 +14,7 @@ export class TokenInterceptor implements HttpInterceptor {
         if (this._loginService.isAuthenticated) {
             req = req.clone({ setHeaders: { Authorization: 'Bearer ' + this._loginService.authInfo ?? '' } });
         }
+        console.log(req);
         return next.handle(req);
     }
 

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // material
@@ -10,6 +11,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
+
+// shared
+import { TokenInterceptor } from 'src/app/shared/interceptors/token-interceptor.interceptor';
 
 // aplicação
 import { PesquisaArtigoComponent } from './pesquisa-artigo.page';
@@ -40,6 +44,11 @@ const routes: Routes = [
         // componentes
         PesquisaArtigoResultadoComponent,
     ],
-    providers: [],
+    providers: [
+        TokenInterceptor,
+
+        // interceptors
+        { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true, },
+    ],
 })
 export class PesquisaArtigoModule { }

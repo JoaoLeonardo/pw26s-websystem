@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // material
@@ -14,6 +14,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
+
+// shared
+import { TokenInterceptor } from 'src/app/shared/interceptors/token-interceptor.interceptor';
 
 // aplicação
 import { ArtigoComponent } from './artigo.page';
@@ -51,6 +54,11 @@ const routes: Routes = [
         CardArtigoCabecalhoComponent,
         CardArtigoTextoComponent,
     ],
-    providers: [],
+    providers: [
+        TokenInterceptor,
+
+        // interceptors
+        { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true, },
+    ],
 })
 export class ArtigoModule { }
