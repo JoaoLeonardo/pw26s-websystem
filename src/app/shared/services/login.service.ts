@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { HttpClient, HttpHeaders } from "@angular/common/http"
-import { Observable, Subject } from "rxjs";
+import { Observable, Subject, Subscription, interval } from "rxjs";
 
 // environment
 import { environment } from "src/environments/environment";
@@ -21,6 +21,11 @@ export abstract class LoginService {
      * @description Evento de login
      */
     private _loginEvent: Subject<boolean>;
+
+    /**
+     * @description Subscription do interval das chamadas de atualização do token
+     */
+    private _refreshSubscription?: Subscription;
 
     constructor(
         private _http: HttpClient,
@@ -68,16 +73,13 @@ export abstract class LoginService {
             const body = 'username=' + request.username + '&password=' + request.password;
 
             this._http.post<{ access_token: string }>(this._url + 'login', body, { headers: headers }).subscribe(response => {
-                const token = response['access_token'];
+                this.storeToken(response);
 
-                if (response['access_token']) {
-                    localStorage.setItem('access_token', token);
-                } else {
-                    localStorage.removeItem('access_token')
+                if (this.isAuthenticated) {
+                    this.startRefreshInterval();
                 }
 
                 observer.next(this.isAuthenticated);
-                this._loginEvent.next(this.isAuthenticated);
                 observer.complete();
             }, error => {
                 observer.error(error);
@@ -87,11 +89,63 @@ export abstract class LoginService {
     }
 
     /**
+     * @description Armazena/remove o token de acesso
+     */
+    private storeToken(response?: { access_token: string }) {
+        const token = response ? response['access_token'] : null;
+
+        if (token) {
+            localStorage.setItem('access_token', token);
+        } else {
+            localStorage.removeItem('access_token')
+        }
+
+        this._loginEvent.next(this.isAuthenticated);
+    }
+
+    /**
+     * @description Inicia a sequência de chamadas refresh com intervalo de 60 segundos
+     */
+    private startRefreshInterval() {
+        if (this._refreshSubscription && !this._refreshSubscription.closed) {
+            this._refreshSubscription.unsubscribe();
+        }
+
+        this._refreshSubscription = new Subscription();
+
+        const source = interval(60000);
+        const subRefresh = source.subscribe(() => this.refreshToken());
+
+        this._refreshSubscription.add(subRefresh);
+    }
+
+    /**
+     * @description Aborta as chamadas de refresh token
+     */
+    private stopRefreshInterval() {
+        this._refreshSubscription?.unsubscribe();
+    }
+
+    /**
+     * @description Atualiza o token de acesso
+     */
+    private refreshToken(): void {
+        this._http.get<{ access_token: string }>(this._url + 'refresh-token').subscribe(response => {
+            this.storeToken(response);
+        }, error => {
+            this.storeToken();
+            this.stopRefreshInterval();
+        });
+    }
+
+
+    /**
      * @description Desloga do sistema
      */
     public logout() {
         localStorage.removeItem("access_token");
         this._loginEvent.next(false);
+        this.stopRefreshInterval();
         this._router.navigateByUrl("").then(res => res);
     }
 
