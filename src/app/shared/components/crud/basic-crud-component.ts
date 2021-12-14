@@ -85,7 +85,7 @@ export abstract class BasicCrudComponent<T> implements CrudComponent<T>, OnInit 
                 this.resetFormNovo();
             }, error => {
                 this.loading = false;
-                this.snackBar.open(error.message, 'Ok');
+                this.snackBar.open((error['error']?.message || error.message) + '', 'Ok');
             });
         }
     }
@@ -104,7 +104,7 @@ export abstract class BasicCrudComponent<T> implements CrudComponent<T>, OnInit 
                 this.resetFormNovo();
             }, error => {
                 this.loading = false;
-                this.snackBar.open(error.message, 'Ok');
+                this.snackBar.open((error['error']?.message || error.message) + '', 'Ok');
             });
         }
     }
@@ -120,7 +120,7 @@ export abstract class BasicCrudComponent<T> implements CrudComponent<T>, OnInit 
             this.form.reset(res);
         }, error => {
             this.loading = false;
-            this.snackBar.open(error.message, 'Ok');
+            this.snackBar.open((error['error']?.message || error.message) + '', 'Ok');
         });
     }
 
@@ -136,7 +136,7 @@ export abstract class BasicCrudComponent<T> implements CrudComponent<T>, OnInit 
             this.controller.notificarOperacaoConcluida();
         }, error => {
             this.loading = false;
-            this.snackBar.open(error.message, 'Ok');
+            this.snackBar.open((error['error']?.message || error.message) + '', 'Ok');
         });
     }
 
@@ -161,7 +161,7 @@ export abstract class BasicCrudComponent<T> implements CrudComponent<T>, OnInit 
             this.form.reset(res);
         }, error => {
             this.loading = false;
-            this.snackBar.open(error.message, 'Ok');
+            this.snackBar.open((error['error']?.message || error.message) + '', 'Ok');
         });
     }
 }

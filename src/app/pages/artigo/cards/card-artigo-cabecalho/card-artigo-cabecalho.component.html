@@ -28,7 +28,7 @@
                     [value]="categoriaControl?.value | idDescricao">
                 <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
                     <mat-option *ngFor="let option of categoriaAutocomplete.optionsFiltradas | async" [value]="option">
-                        {{option.descricao}}
+                        {{option | idDescricao}}
                     </mat-option>
                 </mat-autocomplete>
             </mat-form-field>

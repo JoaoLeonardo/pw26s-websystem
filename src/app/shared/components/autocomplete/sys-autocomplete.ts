@@ -39,8 +39,8 @@ export class SysAutocompleteControl {
         this.buscaFn().subscribe((res: any[]) => {
             this.options = res;
             this.optionsFiltradas = of(this.options);
-        }, (error: { message: string; }) => {
-            this.snackBar.open(error.message, 'Ok');
+        }, (error: { message: string, error: { message: string; }; }) => {
+            this.snackBar.open((error['error']?.message || error.message) + '', 'Ok');
         });
     }
 

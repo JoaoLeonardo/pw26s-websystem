@@ -65,7 +65,7 @@ export class ArtigoPublicadoComponent implements OnInit {
             this.loading = false;
             this.artigo = res;
         }, error => {
-            this.snackBar.open(error.message, 'Ok');
+            this.snackBar.open((error['error']?.message || error.message) + '', 'Ok');
             this.router.navigateByUrl('home');
         });
     }

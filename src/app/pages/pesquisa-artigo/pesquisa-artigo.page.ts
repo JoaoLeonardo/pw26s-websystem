@@ -98,7 +98,7 @@ export class PesquisaArtigoComponent implements OnInit, OnDestroy {
             }
         }, error => {
             this.loading = false;
-            this.snackBar.open(error.message, 'Ok');
+            this.snackBar.open((error['error']?.message || error.message) + '', 'Ok');
         });
     }
 

@@ -55,7 +55,7 @@ body {
 
 .border-r-hard { border-radius: 16px !important;}
 
-.full-width { width: 100%; } /* TODO: Criar versão para cards que não ocupe 100%!!!!!! */
+.full-width { width: 100%; }
 
 .overflow-x {
     overflow-x: scroll;
@@ -85,4 +85,9 @@ body {
 .mat-icon-button {
     width: 44px !important;
     height: 44px !important;
+}
+
+.mat-fab {
+    position: fixed !important;
+    bottom: 32px !important;
 }

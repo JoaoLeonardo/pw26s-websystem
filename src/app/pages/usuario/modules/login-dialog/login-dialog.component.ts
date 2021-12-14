@@ -57,7 +57,7 @@ export class LoginDialogComponent {
             }, error => {
                 this.form.enable();
                 this.loading = false;
-                this.snackBar.open(error.message, 'Ok');
+                this.snackBar.open((error['error']?.message || error.message) + '', 'Ok');
             });
         }
     }

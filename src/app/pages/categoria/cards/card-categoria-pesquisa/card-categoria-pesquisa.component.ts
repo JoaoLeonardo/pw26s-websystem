@@ -76,7 +76,7 @@ export class CardCategoriaPesquisaComponent implements OnInit, OnDestroy {
             this.listaRegistros = res;
         }, error => {
             this.loading = false;
-            this.snackBar.open(error.message, 'Ok');
+            this.snackBar.open((error['error']?.message || error.message) + '', 'Ok');
         })
     }
 

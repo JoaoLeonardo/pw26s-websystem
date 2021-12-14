@@ -98,8 +98,9 @@ export abstract class AdvancedCrudComponent<T> implements CrudComponent<T>, OnIn
                 this.snackBar.open('O registro foi incluído com sucesso!', 'Ok');
                 this.resetFormNovo();
             }, error => {
+                console.log(error);
                 this.loading = false;
-                this.snackBar.open(error.message, 'Ok');
+                this.snackBar.open((error['error']?.message || error.message) + '', 'Ok');
             });
         }
     }
@@ -116,7 +117,7 @@ export abstract class AdvancedCrudComponent<T> implements CrudComponent<T>, OnIn
                 this.snackBar.open('As alterações foram salvas com sucesso!', 'Ok');
             }, error => {
                 this.loading = false;
-                this.snackBar.open(error.message, 'Ok');
+                this.snackBar.open((error['error']?.message || error.message) + '', 'Ok');
             });
         }
     }
@@ -134,7 +135,7 @@ export abstract class AdvancedCrudComponent<T> implements CrudComponent<T>, OnIn
             this.atualizarCards();
         }, error => {
             this.loading = false;
-            this.snackBar.open(error.message, 'Ok');
+            this.snackBar.open((error['error']?.message || error.message) + '', 'Ok');
         });
     }
 
@@ -147,9 +148,10 @@ export abstract class AdvancedCrudComponent<T> implements CrudComponent<T>, OnIn
         this.service.remover(registroId).subscribe(() => {
             this.loading = false;
             this.snackBar.open('O registro foi excluído com sucesso!', 'Ok');
+            this.resetFormNovo();
         }, error => {
             this.loading = false;
-            this.snackBar.open(error.message, 'Ok');
+            this.snackBar.open((error['error']?.message || error.message) + '', 'Ok');
         });
     }
 
@@ -178,7 +180,7 @@ export abstract class AdvancedCrudComponent<T> implements CrudComponent<T>, OnIn
             this.atualizarCards();
         }, error => {
             this.loading = false;
-            this.snackBar.open(error.message, 'Ok');
+            this.snackBar.open((error['error']?.message || error.message) + '', 'Ok');
         });
     }
 }

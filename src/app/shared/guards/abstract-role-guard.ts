@@ -39,7 +39,7 @@ export abstract class AbsctractRoleGuard implements CanActivate {
                     observer.next(error);
                     observer.complete();
                     this.router.navigateByUrl('');
-                    this.snackBar.open(error.message, 'Ok');
+                    this.snackBar.open((error['error']?.message || error.message) + '', 'Ok');
                 });
             } else {
                 observer.next(false);
