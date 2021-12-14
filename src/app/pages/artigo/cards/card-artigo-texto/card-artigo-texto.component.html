@@ -1,24 +1,28 @@
 <mat-card class="d-m">
 
     <!-- Título -->
-    <mat-card-title>Texto</mat-card-title>
+    <mat-card-title>
+        <div class="d-flex justify-between">
+
+            <!-- Texto -->
+            <span>Texto</span>
+
+            <!-- Slide toggle -->
+            <mat-slide-toggle class="title-slide-toggle" [checked]="slideChecked" (toggleChange)="onSlideChange()">
+                Visualizar HTML gerado
+            </mat-slide-toggle>
+
+        </div>
+    </mat-card-title>
 
     <!-- Form -->
     <mat-card-subtitle class="d-pad-top">
         <form [formGroup]="form">
 
-            <!-- Slide toggle -->
-            <div class="full-width d-m row justify-end">
-                <mat-slide-toggle [checked]="slideChecked" (toggleChange)="onSlideChange()">
-                    Visualizar HTML gerado
-                </mat-slide-toggle>
-            </div>
-
             <!-- Campo (texto) -->
-            <mat-form-field *ngIf="!slideChecked; else visualizacaoTexto" class="full-width" appearance="fill">
-                <textarea #textoAutosize matInput formControlName="texto" placeholder="Digite seu texto como HTML..."
-                    cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="15" required></textarea>
-            </mat-form-field>
+            <div *ngIf="!slideChecked; else visualizacaoTexto" class="full-width">
+                <angular-editor formControlName="texto" [config]="editorConfig"></angular-editor>
+            </div>
 
             <!-- Texto como HTML -->
             <ng-template #visualizacaoTexto>

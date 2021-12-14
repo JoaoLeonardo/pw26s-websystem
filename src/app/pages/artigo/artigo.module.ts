@@ -15,8 +15,12 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 
+// editor
+import { AngularEditorModule } from '@kolkov/angular-editor';
+
 // shared
 import { TokenInterceptor } from 'src/app/shared/interceptors/token-interceptor.interceptor';
+import { SysPipesModule } from 'src/app/shared/pipes/sys-pipes.module';
 
 // aplicação
 import { ArtigoComponent } from './artigo.page';
@@ -45,6 +49,12 @@ const routes: Routes = [
         MatChipsModule,
         MatIconModule,
         MatCardModule,
+
+        // Editor
+        AngularEditorModule,
+
+        // shared
+        SysPipesModule,
     ],
     exports: [],
     declarations: [

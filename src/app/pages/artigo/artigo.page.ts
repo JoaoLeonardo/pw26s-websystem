@@ -29,7 +29,6 @@ export class ArtigoComponent extends AdvancedCrudComponent<Artigo> implements On
         public route: ActivatedRoute,
     ) {
         super(crudController, service, snackBar, route);
-        // TODO: Na api, validar se o usuário editando o artigo é o autor
     }
 
     ngOnInit() {

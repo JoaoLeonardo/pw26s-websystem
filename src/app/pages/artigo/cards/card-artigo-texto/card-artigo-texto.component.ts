@@ -1,7 +1,9 @@
 
-import { Component, NgZone, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { CdkTextareaAutosize } from '@angular/cdk/text-field';
+
+// editor
+import { AngularEditorConfig } from '@kolkov/angular-editor';
 
 // shared
 import { AdvancedCrudCard } from 'src/app/shared/components/crud/advanced-crud-card';
@@ -9,47 +11,39 @@ import { AdvancedCrudController } from 'src/app/shared/components/crud/advanced-
 
 // aplicação
 import { Artigo } from '../../models/artigo';
-import { Subscription } from 'rxjs';
+import { getArtigoEditorConfig } from '../../core/artigo-editor-config';
 
 @Component({
     selector: 'app-card-artigo-texto',
-    templateUrl: 'card-artigo-texto.component.html'
+    templateUrl: 'card-artigo-texto.component.html',
+    styleUrls: ['./card-artigo-texto.component.scss']
 })
-export class CardArtigoTextoComponent extends AdvancedCrudCard<Artigo> implements OnInit, OnDestroy {
+export class CardArtigoTextoComponent extends AdvancedCrudCard<Artigo> {
 
-    @ViewChild('textoAutosize') public autosize!: CdkTextareaAutosize;
+    /**
+     * @description Armazena a configuração do editor de texto
+     */
+    public editorConfig: AngularEditorConfig;
 
     /**
      * @description Flag que controla o estado 'checado' do slide-toggle
      */
     public slideChecked: boolean;
 
-    /**
-     * @description Armazena as inscrições de eventos
-     */
-    private _subscription: Subscription;
-
     // TODO: Criar componente próprio para escrever texto (se der tempo)
     constructor(
-        private _ngZone: NgZone,
         public crudController: AdvancedCrudController<Artigo>,
         public formBuilder: FormBuilder,
     ) {
         super(crudController, formBuilder);
-        this.slideChecked = false;
-        this._subscription = new Subscription();
-    }
 
-    ngOnInit(): void {
-        this.implementEvents();
+        // inicializa as variáveis usadas no layout
+        this.editorConfig = getArtigoEditorConfig();
+        this.slideChecked = false;
     }
 
     public get texto(): string {
         return this.form.get('texto')?.value;
-    }
-
-    private implementEvents() {
-        this._subscription.add(this._ngZone.onStable.subscribe(() => this.autosize.resizeToFitContent(true)));
     }
 
     criarForm(): FormGroup {
@@ -63,10 +57,6 @@ export class CardArtigoTextoComponent extends AdvancedCrudCard<Artigo> implement
      */
     public onSlideChange() {
         this.slideChecked = !this.slideChecked;
-    }
-
-    ngOnDestroy() {
-        this._subscription.unsubscribe();
     }
 
 }

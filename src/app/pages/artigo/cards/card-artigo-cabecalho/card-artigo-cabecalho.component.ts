@@ -12,7 +12,6 @@ import { AdvancedCrudController } from 'src/app/shared/components/crud/advanced-
 
 // aplicação
 import { Artigo } from '../../models/artigo';
-import { Categoria } from 'src/app/pages/categoria/models/categoria';
 import { CategoriaService } from 'src/app/pages/categoria/categoria.service';
 import { MaxLenghtValidator } from 'src/app/shared/validators/max-length-validator';
 
@@ -48,17 +47,16 @@ export class CardArtigoCabecalhoComponent extends AdvancedCrudCard<Artigo> imple
         return this.form.get('descricao');
     }
 
+    public get categoriaControl() {
+        return this.form.get('categoria');
+    }
+
     ngOnInit(): void {
         this.registerControls();
-        this.implementChanges();
     }
 
     private registerControls() {
         this.categoriaAutocomplete = new SysAutocompleteControl(this.categoriaService.pesquisarTodos.bind(this.categoriaService), this.snackBar);
-    }
-
-    private implementChanges() {
-        this.form.get('categoria')?.valueChanges.subscribe(this.onChangeCategoria.bind(this));
     }
 
     criarForm(): FormGroup {
@@ -68,13 +66,6 @@ export class CardArtigoCabecalhoComponent extends AdvancedCrudCard<Artigo> imple
             palavrasChave: [null, Validators.required],
             categoria: [null]
         })
-    }
-
-    /**
-     * @description Executa no change do FormControl de categoria
-     */
-    public onChangeCategoria(val: Categoria) {
-        this.categoriaInput.nativeElement.value = val ? val.descricao : ''; 
     }
 
     /**
