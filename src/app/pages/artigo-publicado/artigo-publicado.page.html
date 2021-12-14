@@ -15,7 +15,7 @@
                 <h3>{{artigo.titulo}}</h3>
 
                 <!-- Descrição -->
-                <p><i>{{artigo.descricao}}</i></p>
+                <p>{{artigo.descricao}}</p>
 
                 <!-- Categoria -->
                 <p><b>Categoria:</b> {{artigo.categoria!.descricao}}</p>
@@ -24,13 +24,16 @@
                 <p><b>Palavras-chave:</b> {{artigo.palavrasChave}}</p>
 
                 <!-- Autor -->
-                <p class="text-end"><b>Escrito por:</b> {{artigo.autor?.nome}} {{artigo.autor?.sobrenome}}</p>
+                <p class="text-end">
+                    <b class="text-m-right">Escrito por:</b>
+                    <i>{{artigo.autor?.nome}} {{artigo.autor?.sobrenome}}</i>
+                </p>
 
             </mat-card-subtitle>
         </mat-card>
 
         <!-- Texto -->
-        <mat-card class="d-m" *ngIf="artigo">
+        <mat-card class="d-m full-width" *ngIf="artigo">
             <mat-card-subtitle class="d-pad-top text-justify" [innerHtml]="artigo.texto">
             </mat-card-subtitle>
         </mat-card>

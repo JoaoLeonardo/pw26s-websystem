@@ -6,4 +6,8 @@
         <span class="text-end">Por {{artigo.autor}}</span>
     </div>
 
+    <div *ngIf="!listaArtigos || listaArtigos.length === 0" class="text-center" style="padding-top: 42px;">
+        <h4>Sem artigos por enquanto!</h4>
+    </div>
+
 </div>

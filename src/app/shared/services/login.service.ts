@@ -36,9 +36,8 @@ export abstract class LoginService {
 
     /**
      * @description Retorna as informações do usuário logado
-     * // TODO: tipar
      */
-    public get authInfo() {
+    public get authInfo(): string | null {
         return localStorage.getItem("access_token");
     }
 
@@ -46,7 +45,7 @@ export abstract class LoginService {
      * @description Retorna true se o usuário estiver autenticado
      * // TODO: tipar
      */
-    public get isAuthenticated() {
+    public get isAuthenticated(): boolean {
         return !!localStorage.getItem("access_token");
     }
 
@@ -104,7 +103,7 @@ export abstract class LoginService {
     }
 
     /**
-     * @description Inicia a sequência de chamadas refresh com intervalo de 60 segundos
+     * @description Inicia a sequência de chamadas refresh com intervalo de 60 minutos
      */
     private startRefreshInterval() {
         if (this._refreshSubscription && !this._refreshSubscription.closed) {
@@ -113,7 +112,7 @@ export abstract class LoginService {
 
         this._refreshSubscription = new Subscription();
 
-        const source = interval(60000);
+        const source = interval(600000);
         const subRefresh = source.subscribe(() => this.refreshToken());
 
         this._refreshSubscription.add(subRefresh);

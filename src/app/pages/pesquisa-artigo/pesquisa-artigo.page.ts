@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 
 // material
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -18,7 +18,7 @@ import { ArtigoDTO } from '../homepage/models/artigo-dto';
         FormBuilder,
     ]
 })
-export class PesquisaArtigoComponent implements OnInit {
+export class PesquisaArtigoComponent implements OnInit, OnDestroy {
 
     /**
      * @description FormGroup do filtro de busca
@@ -31,6 +31,11 @@ export class PesquisaArtigoComponent implements OnInit {
     public listaResultado: ArtigoDTO[];
 
     /**
+     * @description Flag que controla a configuração de "busca automática"
+     */
+    public autoBusca?: boolean;
+
+    /**
      * @description Flag que controla o estado "em carregamento" do componente
      */
     public loading: boolean;
@@ -38,7 +43,7 @@ export class PesquisaArtigoComponent implements OnInit {
     /**
      * @description Armazena as incrições de eventos do componente
      */
-    private subscription: Subscription;
+    private subscription?: Subscription;
 
     constructor(
         private artigoService: ArtigoService,
@@ -46,21 +51,31 @@ export class PesquisaArtigoComponent implements OnInit {
         private snackBar: MatSnackBar,
     ) {
         this.form = this.criarForm();
-        this.subscription = new Subscription();
         this.listaResultado = [];
         this.loading = false;
     }
 
     ngOnInit() {
-        this.implementChanges();
+        this.autoBusca = localStorage.getItem('autoBusca') ? localStorage.getItem('autoBusca') !== 'false' : false;
+
+        if (this.autoBusca) {
+            this.implementChanges();
+        }
     }
-    
+
     private criarForm(): FormGroup {
         return this.formBuilder.group({ filtro: [null, Validators.required] })
     }
 
     private implementChanges() {
+        this.subscription = new Subscription();
         this.subscription.add(this.form.get('filtro')!.valueChanges.pipe(debounceTime(300)).subscribe(() => this.filtrarArtigos()));
+    }
+
+    private removeChanges() {
+        if (this.subscription && !this.subscription.closed) {
+            this.subscription.unsubscribe();
+        }
     }
 
     /**
@@ -85,6 +100,25 @@ export class PesquisaArtigoComponent implements OnInit {
             this.loading = false;
             this.snackBar.open(error.message, 'Ok');
         });
+    }
+
+    /**
+     * @description Executa no toggleChange do do slide-toggle da busca automática
+     */
+    public onAutoBuscaChange() {
+        this.autoBusca = !this.autoBusca;
+
+        localStorage.setItem('autoBusca', this.autoBusca + '');
+
+        if (this.autoBusca) {
+            this.implementChanges();
+        } else {
+            this.removeChanges();
+        }
+    }
+
+    ngOnDestroy(): void {
+        this.removeChanges();
     }
 
 }

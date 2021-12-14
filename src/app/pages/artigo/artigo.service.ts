@@ -39,7 +39,13 @@ export class ArtigoService extends CrudService<Artigo> {
      */
     public pesquisarArtigos(filtro: string): Observable<ArtigoDTO[]> {
         const params: HttpParams = new HttpParams().append('filtro', filtro);
-        return this.http.post<ArtigoDTO[]>(this.baseUrl + this.url + '/filtro/titulo-chave', { params: params });
+        return this.http.get<ArtigoDTO[]>(this.baseUrl + this.url + '/filtro/titulo-chave', { params: params }).pipe(
+            // TODO: Remover quando finalizado DTO na api
+            map(response => response.map((dto: any) => {
+                dto.autor = dto.autor ? `${dto.autor['nome']} ${dto.autor['sobrenome']}` : 'sem dados';
+                return dto;
+            }))
+        );
     }
 
     /**
@@ -49,7 +55,7 @@ export class ArtigoService extends CrudService<Artigo> {
         return this.http.get<ArtigoDTO[]>(this.baseUrl + this.url + '/destaque').pipe(
             // TODO: Remover quando finalizado DTO na api
             map(destaques => destaques.map((destaque: any) => {
-                destaque.autor = destaque.autor ? `${destaque.autor['nome']} - ${destaque.autor['sobrenome']}` : 'sem dados';
+                destaque.autor = destaque.autor ? `${destaque.autor['nome']} ${destaque.autor['sobrenome']}` : 'sem dados';
                 return destaque;
             }))
         );
@@ -62,7 +68,7 @@ export class ArtigoService extends CrudService<Artigo> {
         return this.http.get<ArtigoDTO[]>(this.baseUrl + this.url + '/recomendacao').pipe(
             // TODO: Remover quando finalizado DTO na api
             map(destaques => destaques.map((destaque: any) => {
-                destaque.autor = destaque.autor ? `${destaque.autor['nome']} - ${destaque.autor['sobrenome']}` : 'sem dados';
+                destaque.autor = destaque.autor ? `${destaque.autor['nome']} ${destaque.autor['sobrenome']}` : 'sem dados';
                 return destaque;
             }))
         );

@@ -41,6 +41,8 @@ body {
 
 .d-pad-card-container { padding: 8px 5vw !important; }
 
+.text-m-right { margin-right: 4px !important; }
+
 .button-outline { border: 1px solid #fff !important; }
 .button-outline:hover { background-color: #0000001c; }
 
@@ -66,7 +68,6 @@ body {
     text-align: justify;
     text-justify: inter-word;
 }
-
 
 .icon-offset-top { padding-top: 2px; }
 
