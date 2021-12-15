@@ -6,6 +6,9 @@ import { Subscription } from 'rxjs';
 // material
 import { MatSnackBar } from '@angular/material/snack-bar';
 
+// shared
+import { errorTransform } from 'src/app/shared/pipes/error-transform';
+
 // aplicação
 import { ArtigoService } from '../artigo/artigo.service';
 import { ArtigoDTO } from '../homepage/models/artigo-dto';
@@ -98,7 +101,7 @@ export class PesquisaArtigoComponent implements OnInit, OnDestroy {
             }
         }, error => {
             this.loading = false;
-            this.snackBar.open((error['error']?.message || error.message) + '', 'Ok');
+            this.snackBar.open(errorTransform(error), 'Ok');
         });
     }
 

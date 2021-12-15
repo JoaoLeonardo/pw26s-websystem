@@ -7,6 +7,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatStepper } from '@angular/material/stepper';
 import { MatDialog } from '@angular/material/dialog';
 
+// shared
+import { errorTransform } from 'src/app/shared/pipes/error-transform';
+
 // aplicação
 import { UsuarioService } from '../../usuario.service';
 import { UsuarioDialogFormBuilder } from './core/usuario-dialog-form-builder';
@@ -80,7 +83,7 @@ export class UsuarioDialogComponent implements OnInit {
             }, error => {
                 this.loading = false;
                 this.stepper?.previous();
-                this.snackBar.open((error['error']?.message || error.message) + '', 'Ok');
+                this.snackBar.open(errorTransform(error), 'Ok');
             });
         }
     }

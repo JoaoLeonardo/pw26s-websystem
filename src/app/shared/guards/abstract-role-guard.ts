@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 
 // shared
 import { LoginService } from 'src/app/shared/services/login.service';
+import { errorTransform } from '../pipes/error-transform';
 
 // aplicação
 import { UsuarioService } from '../../pages/usuario/usuario.service';
@@ -39,7 +40,7 @@ export abstract class AbsctractRoleGuard implements CanActivate {
                     observer.next(error);
                     observer.complete();
                     this.router.navigateByUrl('');
-                    this.snackBar.open((error['error']?.message || error.message) + '', 'Ok');
+                    this.snackBar.open(errorTransform(error), 'Ok');
                 });
             } else {
                 observer.next(false);

@@ -7,6 +7,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 // shared
 import { AdvancedCrudComponent } from 'src/app/shared/components/crud/advanced-crud-component';
 import { AdvancedCrudController } from 'src/app/shared/components/crud/advanced-crud.controller';
+import { errorTransform } from 'src/app/shared/pipes/error-transform';
 
 // aplicação
 import { Usuario } from './models/usuario';
@@ -53,7 +54,7 @@ export class UsuarioComponent extends AdvancedCrudComponent<Usuario> implements 
             this.atualizarCards();
         }, error => {
             this.loading = false;
-            this.snackBar.open((error['error']?.message || error.message) + '', 'Ok');
+            this.snackBar.open(errorTransform(error), 'Ok');
         });
     }
 

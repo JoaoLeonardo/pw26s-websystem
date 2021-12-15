@@ -80,6 +80,8 @@ export abstract class LoginService {
 
                 observer.next(this.isAuthenticated);
                 observer.complete();
+                
+                window.location.reload();
             }, error => {
                 observer.error(error);
                 observer.complete();

@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 
+// shared
+import { errorTransform } from 'src/app/shared/pipes/error-transform';
+
 // aplicação
 import { ArtigoService } from '../artigo/artigo.service';
 import { Artigo } from '../artigo/models/artigo';
@@ -65,7 +68,7 @@ export class ArtigoPublicadoComponent implements OnInit {
             this.loading = false;
             this.artigo = res;
         }, error => {
-            this.snackBar.open((error['error']?.message || error.message) + '', 'Ok');
+            this.snackBar.open(errorTransform(error), 'Ok');
             this.router.navigateByUrl('home');
         });
     }

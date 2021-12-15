@@ -1,7 +1,11 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 
 // material
 import { MatSnackBar } from '@angular/material/snack-bar';
+
+// shared
+import { errorTransform } from '../../pipes/error-transform';
 
 export class SysAutocompleteControl {
 
@@ -39,8 +43,8 @@ export class SysAutocompleteControl {
         this.buscaFn().subscribe((res: any[]) => {
             this.options = res;
             this.optionsFiltradas = of(this.options);
-        }, (error: { message: string, error: { message: string; }; }) => {
-            this.snackBar.open((error['error']?.message || error.message) + '', 'Ok');
+        }, (error: HttpErrorResponse) => {
+            this.snackBar.open(errorTransform(error), 'Ok');
         });
     }
 

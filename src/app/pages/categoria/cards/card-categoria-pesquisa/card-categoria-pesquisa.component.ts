@@ -5,6 +5,7 @@ import { Observable, Subject, Subscription } from 'rxjs';
 
 // shared
 import { CrudController } from 'src/app/shared/components/crud/crud.controller';
+import { errorTransform } from 'src/app/shared/pipes/error-transform';
 
 // aplicação
 import { CategoriaService } from '../../categoria.service';
@@ -76,7 +77,7 @@ export class CardCategoriaPesquisaComponent implements OnInit, OnDestroy {
             this.listaRegistros = res;
         }, error => {
             this.loading = false;
-            this.snackBar.open((error['error']?.message || error.message) + '', 'Ok');
+            this.snackBar.open(errorTransform(error), 'Ok');
         })
     }
 

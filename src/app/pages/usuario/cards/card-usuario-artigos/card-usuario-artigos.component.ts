@@ -4,6 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 // shared
 import { AdvancedCrudController } from 'src/app/shared/components/crud/advanced-crud.controller';
+import { errorTransform } from 'src/app/shared/pipes/error-transform';
 
 // aplicação
 import { ArtigoDTO } from 'src/app/pages/homepage/models/artigo-dto';
@@ -55,7 +56,7 @@ export class CardUsuarioArtigosComponent implements OnInit {
             this.listaArtigos = res;
         }, error => {
             this.loading = false;
-            this.snackBar.open((error['error']?.message || error.message) + '', 'Ok');
+            this.snackBar.open(errorTransform(error), 'Ok');
         })
     }
 

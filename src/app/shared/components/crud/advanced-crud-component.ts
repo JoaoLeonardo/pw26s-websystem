@@ -4,6 +4,9 @@ import { ActivatedRoute } from "@angular/router";
 // material
 import { MatSnackBar } from "@angular/material/snack-bar";
 
+// shared
+import { errorTransform } from "../../pipes/error-transform";
+
 // aplicação
 import { CrudService } from "./crud.service";
 import { CrudComponent } from "./crud-component";
@@ -100,7 +103,7 @@ export abstract class AdvancedCrudComponent<T> implements CrudComponent<T>, OnIn
             }, error => {
                 console.log(error);
                 this.loading = false;
-                this.snackBar.open((error['error']?.message || error.message) + '', 'Ok');
+                this.snackBar.open(errorTransform(error) + '', 'Ok');
             });
         }
     }
@@ -117,7 +120,7 @@ export abstract class AdvancedCrudComponent<T> implements CrudComponent<T>, OnIn
                 this.snackBar.open('As alterações foram salvas com sucesso!', 'Ok');
             }, error => {
                 this.loading = false;
-                this.snackBar.open((error['error']?.message || error.message) + '', 'Ok');
+                this.snackBar.open(errorTransform(error), 'Ok');
             });
         }
     }
@@ -135,7 +138,7 @@ export abstract class AdvancedCrudComponent<T> implements CrudComponent<T>, OnIn
             this.atualizarCards();
         }, error => {
             this.loading = false;
-            this.snackBar.open((error['error']?.message || error.message) + '', 'Ok');
+            this.snackBar.open(errorTransform(error), 'Ok');
         });
     }
 
@@ -151,7 +154,7 @@ export abstract class AdvancedCrudComponent<T> implements CrudComponent<T>, OnIn
             this.resetFormNovo();
         }, error => {
             this.loading = false;
-            this.snackBar.open((error['error']?.message || error.message) + '', 'Ok');
+            this.snackBar.open(errorTransform(error), 'Ok');
         });
     }
 
@@ -180,7 +183,7 @@ export abstract class AdvancedCrudComponent<T> implements CrudComponent<T>, OnIn
             this.atualizarCards();
         }, error => {
             this.loading = false;
-            this.snackBar.open((error['error']?.message || error.message) + '', 'Ok');
+            this.snackBar.open(errorTransform(error), 'Ok');
         });
     }
 }

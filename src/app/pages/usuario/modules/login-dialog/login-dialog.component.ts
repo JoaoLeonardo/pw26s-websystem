@@ -6,6 +6,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 // shared
+import { errorTransform } from 'src/app/shared/pipes/error-transform';
+
+// shared
 import { LoginService } from 'src/app/shared/services/login.service';
 
 @Component({
@@ -57,7 +60,7 @@ export class LoginDialogComponent {
             }, error => {
                 this.form.enable();
                 this.loading = false;
-                this.snackBar.open((error['error']?.message || error.message) + '', 'Ok');
+                this.snackBar.open(errorTransform(error), 'Ok');
             });
         }
     }
