@@ -5,6 +5,7 @@ export enum ToolbarButtonAction {
     ARTIGO = 'Novo Artigo',
     LOGIN = 'Login/cadastro',
     LOGOUT = 'Desconectar',
+    CATEGORIA = 'Categoria',
     INFO = 'Saiba +'
 }
 
@@ -23,7 +24,7 @@ export function getToolbarButtonActionOptions(): LabelValue[] {
 /**
  * @returns Opções da toolbar para usuários não logados
  */
-export function getToolbarButtonActionLoginOptions(): LabelValue[] {
+export function getToolbarButtonActionAnonOptions(): LabelValue[] {
     return [
         { label: ToolbarButtonAction.LOGIN, value: 'LOGIN' },
         { label: ToolbarButtonAction.INFO, value: 'INFO' },
@@ -35,6 +36,17 @@ export function getToolbarButtonActionLoginOptions(): LabelValue[] {
  */
 export function getToolbarButtonActionLogadoOptions(): LabelValue[] {
     return [
+        { label: ToolbarButtonAction.ARTIGO, value: 'ARTIGO' },
+        { label: ToolbarButtonAction.INFO, value: 'INFO' },
+    ]
+}
+
+/**
+ * @returns Opções da toolbar para admins
+ */
+export function getToolbarButtonActionAdminOptions(): LabelValue[] {
+    return [
+        { label: ToolbarButtonAction.CATEGORIA, value: 'CATEGORIA' },
         { label: ToolbarButtonAction.ARTIGO, value: 'ARTIGO' },
         { label: ToolbarButtonAction.INFO, value: 'INFO' },
     ]
