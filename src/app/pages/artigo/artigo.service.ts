@@ -10,7 +10,7 @@ import { CrudService } from 'src/app/shared/components/crud/crud.service';
 import { ArtigoDTO } from '../homepage/models/artigo-dto';
 import { Artigo } from './models/artigo';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class ArtigoService extends CrudService<Artigo> {
 
     constructor(public http: HttpClient) {

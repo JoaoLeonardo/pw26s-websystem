@@ -17,7 +17,6 @@ import { ArtigoService } from './artigo.service';
     templateUrl: 'artigo.page.html',
     providers: [
         AdvancedCrudController,
-        ArtigoService,
     ]
 })
 export class ArtigoComponent extends AdvancedCrudComponent<Artigo> implements OnInit {

@@ -10,9 +10,6 @@ import { ArtigosRowComponent } from './components/artigos-row/artigos-row.compon
     selector: 'app-homepage',
     templateUrl: './homepage.page.html',
     styleUrls: ['./homepage.page.scss'],
-    providers: [
-        ArtigoService,
-    ]
 })
 export class HomepageComponent implements OnInit, AfterViewInit, OnDestroy {
 

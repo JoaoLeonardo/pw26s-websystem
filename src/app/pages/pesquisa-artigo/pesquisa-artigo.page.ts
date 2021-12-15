@@ -16,10 +16,7 @@ import { ArtigoDTO } from '../homepage/models/artigo-dto';
 @Component({
     selector: 'app-pesquisa-artigo',
     templateUrl: 'pesquisa-artigo.page.html',
-    providers: [
-        ArtigoService,
-        FormBuilder,
-    ]
+    providers: [ FormBuilder ]
 })
 export class PesquisaArtigoComponent implements OnInit, OnDestroy {
 

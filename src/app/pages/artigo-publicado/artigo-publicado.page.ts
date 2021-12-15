@@ -13,7 +13,6 @@ import { Artigo } from '../artigo/models/artigo';
     selector: 'app-artigo-publicado',
     templateUrl: 'artigo-publicado.page.html',
     styleUrls: ['artigo-publicado.page.scss'],
-    providers: [ ArtigoService ]
 })
 export class ArtigoPublicadoComponent implements OnInit {
 

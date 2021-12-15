@@ -57,6 +57,7 @@ body {
 .border-r-hard { border-radius: 16px !important;}
 
 .full-width { width: 100%; }
+.half-width { width: 50%; }
 
 .overflow-x {
     overflow-x: scroll;

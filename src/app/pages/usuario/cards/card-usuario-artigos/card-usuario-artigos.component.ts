@@ -14,7 +14,6 @@ import { Usuario } from '../../models/usuario';
 @Component({
     selector: 'app-card-usuario-artigos',
     templateUrl: 'card-usuario-artigos.component.html',
-    providers: [ArtigoService]
 })
 export class CardUsuarioArtigosComponent implements OnInit {
 
