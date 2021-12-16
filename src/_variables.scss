@@ -16,6 +16,12 @@ $soft-theme:   mat-light-theme($soft-primary, $soft-accent);
 // TEMA DE SUCESSO
 $sucess:        mat-palette($mat-green, 400);
 $sucess-accent: mat-palette($mat-green, 700);
-$sucess-theme:  mat-light-theme($sucess, sucess-accent);
+$sucess-theme:  mat-light-theme($sucess, $sucess-accent);
+
+
+// TEMA ESCURO
+$dark:        mat-palette($mat-grey, 700);
+$dark-accent: mat-palette($mat-grey, 800);
+$dark-theme:  mat-light-theme($dark, $dark-accent);
 
 @include angular-material-theme($theme);

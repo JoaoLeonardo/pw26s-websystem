@@ -1,5 +1,5 @@
 <!-- Logo -->
-<div class="homepage-logo d-flex justify-evenly align-center" [class.mat-elevation-z2]="true">
+<div class="homepage-logo d-flex justify-evenly align-center d-m-bottom" [class.mat-elevation-z2]="true">
     <mat-icon class="d-pad hover-div mouse-pointer" aria-hidden="false" (click)="onClickLogo()">
         format_align_center
     </mat-icon>
@@ -12,13 +12,37 @@
 </div>
 
 <!-- Recomendações -->
-<div class="d-pad" [ngStyle]="{'display': isAuthenticated ? '' : 'none'}">
+<div class="d-pad d-m-bottom" [ngStyle]="{'display': isAuthenticated ? '' : 'none'}">
     <h3><b>Recomendado para você:</b></h3>
     <app-artigos-row #recomendacoesRow class="full-width"></app-artigos-row>
 </div>
 
 <!-- Destaques -->
-<div class="d-pad">
+<div class="d-pad d-m-bottom">
     <h3><b>Top artigos do mês:</b></h3>
     <app-artigos-row #destaquesRow class="full-width"></app-artigos-row>
 </div>
+
+<!-- Rodapé -->
+<footer class="d-flex column align-center d-pad homepage-footer">
+
+    <!-- Links -->
+    <div class="row">
+        <a href="">Termos e condições</a>
+        <span class="d-m-horizontal">|</span>
+        <a href="">Feedback</a> 
+        <span class="d-m-horizontal">|</span>
+        <a href="">Quem somos?</a> 
+        <span class="d-m-horizontal">|</span>
+        <a href="">Fale conosco</a>
+    </div>
+
+    <!-- Logo -->
+    <div class="row justify-center align-center">
+        <mat-icon class="d-pad hover-div mouse-pointer" aria-hidden="false">
+            format_align_center
+        </mat-icon>
+        <span>Sistema de artigos - 2021</span>
+    </div>
+
+</footer>
