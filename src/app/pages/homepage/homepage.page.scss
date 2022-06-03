@@ -9,7 +9,7 @@ $dark-accent: map-get($dark-theme, accent);
     width: 100vw; 
     height: 70vh;
     background-color: mat-color($accent);
-    min-height: 700px;
+    min-height: 500px;
 }
 
 .homepage-logo mat-icon {
@@ -27,6 +27,11 @@ $dark-accent: map-get($dark-theme, accent);
     line-height: 150px;
     color: white;
     text-shadow: 2px 0px 1px #000;
+}
+
+.homepage-info {
+    margin-right: 10vw;
+    margin-left: 10vw;
 }
 
 footer {

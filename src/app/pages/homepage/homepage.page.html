@@ -1,26 +1,33 @@
 <!-- Logo -->
 <div class="homepage-logo d-flex justify-evenly align-center d-m-bottom" [class.mat-elevation-z2]="true">
-    <mat-icon class="d-pad hover-div mouse-pointer" aria-hidden="false" (click)="onClickLogo()">
-        format_align_center
+    <mat-icon class="d-pad hover-div mouse-pointer" aria-hidden="false">
+        library_music
     </mat-icon>
     <div class="d-flex column homepage-logo-title-container">
-        <b>Sis</b>
-        <b>Tema</b>
-        <b>De</b>
-        <b>Artigos</b>
+        <b>MIDI</b>
+        <b>GAN</b>
+        <b>Generation</b>
     </div>
 </div>
 
-<!-- Recomendações -->
-<div class="d-pad d-m-bottom" [ngStyle]="{'display': isAuthenticated ? '' : 'none'}">
-    <h3><b>Recomendado para você:</b></h3>
-    <app-artigos-row #recomendacoesRow class="full-width"></app-artigos-row>
-</div>
+<!-- Melody Generation -->
+<div class="d-pad homepage-info">
 
-<!-- Destaques -->
-<div class="d-pad d-m-bottom">
-    <h3><b>Top artigos do mês:</b></h3>
-    <app-artigos-row #destaquesRow class="full-width"></app-artigos-row>
+    <h3><b>Generate a melody</b></h3>
+    <p>
+        The objective of the proposed GAN is the generation of melodies with a duration of thirty seconds that follow
+        the appropriate structures of each genre <i>g</i> informed as input to the composition process. For this
+        purpose, three
+        distinct neural networks are used: G as a generator, D as a genre discriminator, and R as a quality
+        discriminator.
+    </p>
+
+    <div class="row justify-end d-pad">
+        <button mat-button class="mat-button-sucess" (click)="generate()">Generate melody</button>
+    </div>
+
+    <app-player></app-player>
+
 </div>
 
 <!-- Rodapé -->
@@ -28,21 +35,15 @@
 
     <!-- Links -->
     <div class="row d-pad-top">
-        <a href="">Termos e condições</a>
-        <span class="d-m-horizontal">|</span>
-        <a href="">Feedback</a> 
-        <span class="d-m-horizontal">|</span>
-        <a href="">Quem somos?</a> 
-        <span class="d-m-horizontal">|</span>
-        <a href="">Fale conosco</a>
+        <a href="https://pt.overleaf.com/project/624b224812931430467f5955">Paper</a>
     </div>
 
     <!-- Logo -->
     <div class="row justify-center align-center">
         <mat-icon class="d-pad" aria-hidden="false">
-            format_align_center
+            library_music
         </mat-icon>
-        <span>Sistema de artigos - 2021</span>
+        <span>MIDI GAN Generator - 2022</span>
     </div>
 
 </footer>

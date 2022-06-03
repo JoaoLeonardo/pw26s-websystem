@@ -1,9 +1,0 @@
-@import "../../../../../variables";
-
-$primary: map-get($theme, primary);
-
-mat-icon {
-    width: unset;
-    height: unset;
-    font-size: 5em;
-}

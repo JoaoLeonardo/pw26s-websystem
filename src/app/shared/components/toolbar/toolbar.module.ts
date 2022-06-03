@@ -10,9 +10,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 
-// pages
-import { UsuarioDialogModule } from 'src/app/pages/usuario/modules/usuario-dialog/usuario-dialog.module';
-
 // aplicação
 import { ToolbarComponent } from './toolbar.component';
 
@@ -28,9 +25,6 @@ import { ToolbarComponent } from './toolbar.component';
         MatButtonModule,
         MatMenuModule,
         MatIconModule,
-
-        // pages
-        UsuarioDialogModule,
     ],
     exports: [ToolbarComponent],
     declarations: [ToolbarComponent],

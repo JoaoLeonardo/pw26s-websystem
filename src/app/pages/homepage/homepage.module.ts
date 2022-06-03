@@ -1,17 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 // material
 import { MatIconModule } from '@angular/material/icon';
 
 // shared
-import { TokenInterceptor } from 'src/app/shared/interceptors/token-interceptor.interceptor';
+import { PlayerModule } from 'src/app/shared/components/player/player.module';
 
 // aplicação
 import { HomepageComponent } from './homepage.page';
-import { ArtigosRowComponent } from './components/artigos-row/artigos-row.component';
+import { MatButtonModule } from '@angular/material/button';
 
 const routes: Routes = [
     { path: '', component: HomepageComponent }
@@ -24,16 +23,13 @@ const routes: Routes = [
 
         // material
         MatIconModule,
+        MatButtonModule,
+
+        // shared
+        PlayerModule,
     ],
     declarations: [
         HomepageComponent,
-        ArtigosRowComponent,
-    ],
-    providers: [
-        TokenInterceptor,
-
-        // interceptors
-        { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true, },
     ],
 })
 export class HomepageModule { }
