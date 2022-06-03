@@ -93,3 +93,11 @@ body {
     position: fixed !important;
     bottom: 32px !important;
 }
+
+.text-sucess {
+    color: green !important;
+}
+
+.text-error {
+    color: red !important;
+}

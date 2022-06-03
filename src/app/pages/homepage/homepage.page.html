@@ -1,6 +1,6 @@
 <!-- Logo -->
 <div class="homepage-logo d-flex justify-evenly align-center d-m-bottom" [class.mat-elevation-z2]="true">
-    <mat-icon class="d-pad hover-div mouse-pointer" aria-hidden="false">
+    <mat-icon class="d-pad hover-div mouse-pointer" aria-hidden="false" (click)="onClickLogo()">
         library_music
     </mat-icon>
     <div class="d-flex column homepage-logo-title-container">
@@ -23,10 +23,10 @@
     </p>
 
     <div class="row justify-end d-pad">
-        <button mat-button class="mat-button-sucess" (click)="generate()">Generate melody</button>
+        <button mat-button (click)="generate()">Generate melody</button>
     </div>
 
-    <app-player></app-player>
+    <app-player [noteSequence]="melody"></app-player>
 
 </div>
 

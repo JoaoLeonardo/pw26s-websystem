@@ -1,7 +1,31 @@
-<section>
+<section *ngIf="noteSequence">
 
-    <div class="row justify-end d-pad">
-        <button mat-button class="mat-button-sucess" (click)="play()">Play melody</button>
+    <div class="midi-visualizer d-pad">
+        {{noteSequence | json}}
+        <span *ngFor="let note of noteSequence.notes">
+            {{note}}
+        </span>
+
     </div>
-    
+
+    <!-- Ações -->
+    <div class="row d-pad justify-between">
+
+        <!-- Avaliação -->
+        <div class="row">
+            <button mat-icon-button class="text-sucess hover-div" label="Like">
+                <mat-icon>thumb_up</mat-icon>
+            </button>
+            <button mat-icon-button class="text-error hover-div" label="Dislike">
+                <mat-icon>thumb_down</mat-icon>
+            </button>
+        </div>
+
+        <button mat-button (click)="play()">
+            Play <mat-icon>play_arrow</mat-icon>
+        </button>
+
+    </div>
+
+
 </section>
