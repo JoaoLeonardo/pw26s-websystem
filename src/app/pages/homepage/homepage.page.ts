@@ -24,7 +24,7 @@ export class HomepageComponent {
      * @description Busca um índice aleatório no JSON de dados
      */
     public generate() {
-        const randomIndex = Math.floor(Math.random() * 19);
+        const randomIndex = Math.floor(Math.random() * 0);
         const dto: MelodyDTO = dataSet[randomIndex];
         this.melody = dto;
     }

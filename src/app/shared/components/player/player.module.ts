@@ -6,6 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 
 // aplicação
+import { PlayerBtnPipe } from './pipes/player-btn.pipe';
 import { PlayerComponent } from './player.component';
 
 @NgModule({
@@ -18,6 +19,9 @@ import { PlayerComponent } from './player.component';
     ],
     declarations: [
         PlayerComponent,
+
+        // pipes
+        PlayerBtnPipe,
     ],
     exports: [
         PlayerComponent
