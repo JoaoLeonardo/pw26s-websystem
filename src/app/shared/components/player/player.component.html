@@ -1,7 +1,8 @@
 <section *ngIf="noteSequence">
 
+    <!-- Visualização da melodia -->
     <div class="midi-visualizer d-pad">
-        {{noteSequence | json}}
+        <app-visualizer [noteSequence]="noteSequence"></app-visualizer>
     </div>
 
     <!-- Ações -->

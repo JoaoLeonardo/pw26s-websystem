@@ -55,6 +55,15 @@
                     "quantizedStartStep": "24",
                     "startTime": 6,
                     "velocity": 100
+                },
+                {
+                    "endTime": 8,
+                    "pitch": 64,
+                    "pitchName": "E",
+                    "quantizedEndStep": "32",
+                    "quantizedStartStep": "28",
+                    "startTime": 7,
+                    "velocity": 100
                 }
             ],
             "quantizationInfo": {
@@ -72,8 +81,8 @@
                     "numerator": 4
                 }
             ],
-            "totalQuantizedSteps": "28",
-            "totalTime": 7
+            "totalQuantizedSteps": "32",
+            "totalTime": 8
         }
     }
 ]

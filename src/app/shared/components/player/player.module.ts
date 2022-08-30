@@ -6,6 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 
 // aplicação
+import { VisualizerModule } from '../visualizer/visualizer.module';
 import { PlayerBtnPipe } from './pipes/player-btn.pipe';
 import { PlayerComponent } from './player.component';
 
@@ -16,6 +17,9 @@ import { PlayerComponent } from './player.component';
         // material
         MatButtonModule,
         MatIconModule,
+
+        // aplicação
+        VisualizerModule,
     ],
     declarations: [
         PlayerComponent,
