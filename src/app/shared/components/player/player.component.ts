@@ -41,15 +41,16 @@ export class PlayerComponent implements OnInit, OnChanges {
 
         if (!this.midiPlayer.isPlaying()) {
             this.isPlaying = true;
+
             await this.midiPlayer.start({
                 notes: this.noteSequence.notes,
                 totalTime: this.noteSequence.totalTime
             });
+            
+            this.isPlaying = false;
         } else {
             this.midiPlayer.stop();
         }
-        
-        this.isPlaying = false;
     }
 
     public rate() { }

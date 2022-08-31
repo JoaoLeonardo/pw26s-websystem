@@ -1,8 +1,14 @@
-<section *ngIf="noteSequence">
+<section *ngIf="noteSequence" class="d-flex column">
 
     <!-- Visualização da melodia -->
     <div class="midi-visualizer d-pad">
         <app-visualizer [noteSequence]="noteSequence"></app-visualizer>
+    </div>
+
+    <div class="d-pad">
+        <div class="progress-bar">
+            <div class="progress" appProgressBar [maxTime]="noteSequence.totalTime" [isPlaying]="isPlaying"></div>
+        </div>
     </div>
 
     <!-- Ações -->

@@ -6,11 +6,21 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 
 // aplicação
+import { ProgressBarDirective } from './directives/progress-bar.directive';
 import { VisualizerModule } from '../visualizer/visualizer.module';
 import { PlayerBtnPipe } from './pipes/player-btn.pipe';
 import { PlayerComponent } from './player.component';
 
 @NgModule({
+    declarations: [
+        PlayerComponent,
+
+        // pipes
+        PlayerBtnPipe,
+
+        // directives
+        ProgressBarDirective,
+    ],
     imports: [
         CommonModule,
 
@@ -21,14 +31,8 @@ import { PlayerComponent } from './player.component';
         // aplicação
         VisualizerModule,
     ],
-    declarations: [
-        PlayerComponent,
-
-        // pipes
-        PlayerBtnPipe,
-    ],
     exports: [
-        PlayerComponent
+        PlayerComponent,
     ],
     providers: [],
 })
